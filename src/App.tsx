@@ -1,13 +1,25 @@
-import './App.css'
+// import './App.css'
+
+import React from 'react'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+import { FallBackSpinner } from './components/FallBackSpinner'
+import { persistor, store } from './redux/store'
+
+const CovidForm = React.lazy<any>(() => import('./views/CovidForm'))
 
 function App() {
   return (
-    <div className="App">
-      <h1>
-        React App - {process.env.NODE_ENV} {process.env.name}
-      </h1>
-    </div>
-  ) 
+    <React.Suspense fallback={<FallBackSpinner />}>
+      <div className="App">
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <CovidForm />
+          </PersistGate>
+        </Provider>
+      </div>
+    </React.Suspense>
+  )
 }
 
 export default App
