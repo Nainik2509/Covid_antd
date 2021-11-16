@@ -1,12 +1,9 @@
-// import './App.css'
-
 import React from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { FallBackSpinner } from './components/FallBackSpinner'
 import { persistor, store } from './redux/store'
-
-const CovidForm = React.lazy<any>(() => import('./views/CovidForm'))
+import { Router } from './router/Router'
 
 function App() {
   return (
@@ -14,7 +11,7 @@ function App() {
       <div className="App">
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <CovidForm />
+            <Router />
           </PersistGate>
         </Provider>
       </div>

@@ -1,4 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosPromise, AxiosResponse, AxiosError } from 'axios';
+import { notifyError } from '../utils/toaster';
+import { handleunAuthorised } from './actions/auth';
 
 const API = axios.create({
     baseURL: "http://localhost:8000/",
@@ -29,5 +31,18 @@ API.interceptors.response.use((res: AxiosResponse) => {
 }, (err: AxiosError) => {
     console.log("Error :");
     console.log(err);
+    if (err?.response?.status === 400) {
+        notifyError({ header: null, message: err?.response?.data?.message });
+    }
+    if (err?.response?.status === 404) {
+        notifyError({ header: null, message: err?.response?.data?.message });
+    }
+    if (err?.response?.status === 403) {
+        notifyError({ header: "Forbidden", message: err?.response?.data?.message });
+    }
+    if (err?.response?.status === 401) {
+        notifyError({ header: "UnAuthorised", message: err?.response?.data?.message });
+        handleunAuthorised()
+    }
     return err;
 })

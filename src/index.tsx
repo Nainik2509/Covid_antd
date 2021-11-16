@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
@@ -8,10 +11,14 @@ import reportWebVitals from './reportWebVitals'
 import 'bootstrap/dist/css/bootstrap.css'
 // React Flatpickr CSS
 import 'flatpickr/dist/themes/material_blue.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <ToastContainer />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )
