@@ -44,10 +44,9 @@ type ParsedFilter = {
   page: number
   perPage: number
   search: string
-};
+}
 
 const CovidForm = () => {
-
   const dispatch = useDispatch()
 
   // Initial Values for form
@@ -64,7 +63,7 @@ const CovidForm = () => {
   const [parsedFilter, setParsedFilter] = useState<ParsedFilter>({
     page: 0,
     perPage: 20,
-    search: ''
+    search: '',
   })
 
   // useEffect for countrylisting
@@ -216,9 +215,7 @@ const CovidForm = () => {
               </FormGroup>
             </Col>
             <Col lg={6} md={6} sm={12}>
-              <Label>
-                Country of origin
-              </Label>
+              <Label>Country of origin</Label>
               <FormGroup>
                 <Controller
                   control={control}
@@ -247,9 +244,13 @@ const CovidForm = () => {
                     />
                   )}
                 />
-                {errors && errors.country_of_origin && errors.country_of_origin.message && (
-                  <FormFeedback>{errors.country_of_origin.message}</FormFeedback>
-                )}
+                {errors &&
+                  errors.country_of_origin &&
+                  errors.country_of_origin.message && (
+                    <FormFeedback>
+                      {errors.country_of_origin.message}
+                    </FormFeedback>
+                  )}
               </FormGroup>
             </Col>
           </Row>
