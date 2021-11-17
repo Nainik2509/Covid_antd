@@ -20,7 +20,7 @@ type CountryList = {
   payload: Array<CountryObj>
 }
 
-export type IAction = CountryList | any
+export type IAction = CountryList
 
 export type InitialState = {
   countryList: Array<CountryObj>

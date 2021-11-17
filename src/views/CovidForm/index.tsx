@@ -69,7 +69,7 @@ const CovidForm = () => {
   // useEffect for countrylisting
   useEffect(() => {
     dispatch(getData(parsedFilter))
-  }, [parsedFilter])
+  }, [parsedFilter, dispatch])
 
   // Country Listing from store
   const countryList = useSelector(
@@ -130,7 +130,7 @@ const CovidForm = () => {
   return (
     <Card className="m-5">
       <CardHeader className="d-flex justify-content-center font-weight-bolder">
-        COVID SURVEY FORM
+        Health Care Survey-Corona Virus (COVID-19) Awareness Survey
       </CardHeader>
       <CardBody className="p-5">
         <Form onSubmit={handleSubmit(onSubmit)}>

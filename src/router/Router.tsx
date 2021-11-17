@@ -1,6 +1,7 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
 
 const CovidForm = React.lazy<any>(() => import('../views/CovidForm'))
 const LoginPage = React.lazy<any>(() => import('../views/Login'))
@@ -9,10 +10,10 @@ export const Router = () => {
   // Country Listing from store
   return (
     <Switch>
-      <Route exact path="/" component={LoginPage} />
-      <Route exact path="/login" component={LoginPage} />
-      <PrivateRoute exact path="/covid" component={CovidForm} />
-      <Route render={() => <h1>404 Page not found</h1>} />
+      <PublicRoute exact path="/" component={LoginPage} />
+      <PublicRoute exact path="/login" component={LoginPage} />
+      <PrivateRoute exact path="/dashboard" component={CovidForm} />
+      <PublicRoute render={() => <h1>404 Page not found</h1>} />
     </Switch>
   )
 }

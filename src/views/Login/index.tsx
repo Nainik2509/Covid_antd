@@ -37,6 +37,7 @@ type InputFormTypes = {
 const Login = () => {
   const dispatch: AppDispatch = useDispatch()
   const history = useHistory()
+
   // Initial Values for form
   const initialValues = {
     email: '',
@@ -81,7 +82,7 @@ const Login = () => {
             header: 'Success',
             message: 'User login successfully.',
           })
-          history.push('/covid')
+          history.push('/dashboard')
         }
       })
     }

@@ -9,5 +9,5 @@ const rootReducer = combineReducers({
 })
 
 export type RootState = ReturnType<typeof rootReducer>
-export type AppDispatch = ThunkDispatch<any, any, AnyAction>
+export type AppDispatch = ThunkDispatch<any, RootState, AnyAction>
 export default rootReducer

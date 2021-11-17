@@ -5,7 +5,7 @@ import {
 } from '../../actions/auth/auth-types'
 
 const initialState: InitialState = {
-  userData: {},
+  userData: null,
   token: '',
 }
 
@@ -23,7 +23,7 @@ const Autheducer = (
     case AuthActions.USER_UNAUTHORIZE:
       return {
         ...state,
-        userData: {},
+        userData: null,
         token: '',
       }
     default:

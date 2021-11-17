@@ -21,7 +21,11 @@ type AuthLogin = {
   payload: { userData: loginObj; token: string }
 }
 
-export type IAction = AuthLogin | any
+type HandleunAuthorised = {
+  type: AuthActions.USER_UNAUTHORIZE
+}
+
+export type IAction = AuthLogin | HandleunAuthorised
 
 export type InitialState = {
   userData: loginObj | null

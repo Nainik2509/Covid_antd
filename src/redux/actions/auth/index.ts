@@ -9,7 +9,7 @@ type loginData = {
 // ** API for user login
 export const handleLogin = (data: loginData) => {
   return async (dispatch: Dispatch<IAction>) => {
-    return API.post(`/api/v1/auth/login`, data).then((response: any) => {
+    return API.post(`/api/v1/auth/login`, data).then((response) => {
       if (response && response.status === 200) {
         dispatch({
           type: AuthActions.USER_LOGIN,
@@ -30,7 +30,7 @@ export const handleLogin = (data: loginData) => {
 export const handleunAuthorised = () => {
   return async (dispatch: Dispatch<IAction>) => {
     dispatch({
-      type: AuthActions.USER_LOGIN,
+      type: AuthActions.USER_UNAUTHORIZE,
     })
   }
 }

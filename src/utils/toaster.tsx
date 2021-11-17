@@ -2,8 +2,8 @@ import { Fragment } from 'react'
 import { Slide, toast } from 'react-toastify'
 
 type ToastProps = {
-  header: string | any
-  message: string | any
+  header: string | null
+  message: string | null
 }
 
 const ErrorToast = ({ message, header }: ToastProps) => {
