@@ -9,6 +9,7 @@ type covidFormData = {
   countryId: number | null
   out_break: string
 }
+
 // ** API for add Covid Survey
 export const addCovidSurvey = (data: covidFormData) => {
   return async (dispatch: Dispatch<IAction>) => {
@@ -16,6 +17,23 @@ export const addCovidSurvey = (data: covidFormData) => {
       if (response && response.status === 200) {
         dispatch({
           type: CovidSurveyActions.ADD_COVID_SURVEY,
+          payload: response.data.data,
+        })
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+}
+
+// ** API for add Covid Survey
+export const getCovidSurvey = () => {
+  return async (dispatch: Dispatch<IAction>) => {
+    return API.get(`/api/v1/covidSurvey/userCovidSurvey`).then((response) => {
+      if (response && response.status === 200) {
+        dispatch({
+          type: CovidSurveyActions.GET_USER_COVID_SURVEY,
           payload: response.data.data,
         })
         return true

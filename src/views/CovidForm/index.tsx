@@ -25,7 +25,7 @@ import { REQUIRED_ERROR, REQUIRED_TYPE } from '../../utils/Utilities'
 import { getData } from '../../redux/actions/country'
 import { AppDispatch, RootState } from '../../redux/reducers/rootReducers'
 import { CountryObj } from '../../redux/actions/country/country-types'
-import { addCovidSurvey } from '../../redux/actions/covidSurvey'
+import { addCovidSurvey, getCovidSurvey } from '../../redux/actions/covidSurvey'
 import { notifySuccess } from '../../utils/toaster'
 
 // Types checking for form
@@ -67,6 +67,17 @@ const CovidForm = () => {
     perPage: 20,
     search: '',
   })
+
+  const [addNew, setAddNew] = useState(true)
+
+  const userCovidSurvey = useSelector(
+    (state: RootState) => state.covidSurveyReducer.covidObj
+  )
+
+  // useEffect for countrylisting
+  useEffect(() => {
+    dispatch(getCovidSurvey())
+  }, [dispatch])
 
   // useEffect for countrylisting
   useEffect(() => {
@@ -110,7 +121,8 @@ const CovidForm = () => {
     setValue,
     control, //This object contains methods for registering components into React Hook Form.
     trigger, // Use for manually triggering errors
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
+    reset,
   } = useForm<InputFormTypes>({
     mode: 'all', // ['onBlur','onChange','onSubmit','all'] --> 	Validation will trigger on the blur and change events.
     reValidateMode: 'onChange', // [onChange | onBlur | onSubmit] --> inputs with errors get re-validated
@@ -118,19 +130,39 @@ const CovidForm = () => {
     resolver: yupResolver(ValidationScheme), // Form Validations
   })
 
+  useEffect(() => {
+    if (userCovidSurvey) {
+      setAddNew(false)
+      reset({ ...userCovidSurvey })
+      const temp = countryList
+        .map(renderCountryOption)
+        .find((id) => id.value === getValues('countryId'))
+      if (!temp) {
+        setParsedFilter((parsedFilter) => ({
+          ...parsedFilter,
+          search: `${getValues('countryId')}`,
+        }))
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userCovidSurvey, reset])
+
   // Handle Submit Event
   const onSubmit = () => {
     trigger()
-    console.log(getValues())
-    if (isDirty && isValid) {
-      dispatch(addCovidSurvey(getValues())).then((data) => {
-        if (data) {
-          notifySuccess({
-            header: 'Success',
-            message: 'Your survey has been submitted.',
-          })
-        }
-      })
+    if (isValid) {
+      if (addNew) {
+        dispatch(addCovidSurvey(getValues())).then((data) => {
+          if (data) {
+            notifySuccess({
+              header: 'Success',
+              message: 'Your survey has been submitted.',
+            })
+          }
+        })
+      } else {
+        console.log(getValues())
+      }
     }
   }
 
@@ -236,11 +268,25 @@ const CovidForm = () => {
                     <Select
                       placeholder="Select country of origin"
                       options={countryList.map(renderCountryOption)}
+                      value={
+                        field.value &&
+                        countryList
+                          .map(renderCountryOption)
+                          .find((id) => id.value === field.value)
+                      }
                       onInputChange={(type) => {
                         if (type) {
                           setParsedFilter({ ...parsedFilter, search: type })
                         } else {
-                          setParsedFilter({ ...parsedFilter, search: '' })
+                          const temp = countryList
+                            .map(renderCountryOption)
+                            .find((id) => id.value === getValues('countryId'))
+                          if (!temp) {
+                            setParsedFilter((parsedFilter) => ({
+                              ...parsedFilter,
+                              search: `${getValues('countryId')}`,
+                            }))
+                          }
                         }
                       }}
                       onChange={(selected) => {
@@ -283,8 +329,9 @@ const CovidForm = () => {
                             onChange={(e) =>
                               setValue('age_group', e.target.value)
                             }
-                            defaultChecked={getValues('age_group') === data}
+                            checked={getValues('age_group') === data}
                             value={data}
+                            // defaultChecked={getValues('age_group') === data}
                           />
                           <span style={{ marginLeft: '10px' }}>{data}</span>
                         </Label>
