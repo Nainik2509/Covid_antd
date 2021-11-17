@@ -362,7 +362,7 @@ const CovidForm = () => {
           <Row>
             <Col className="d-flex justify-content-end">
               <Button outline color="primary" className="round">
-                Submit
+                {addNew ? 'Submit' : 'Update'}
               </Button>
             </Col>
           </Row>
