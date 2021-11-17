@@ -23,16 +23,18 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { REQUIRED_ERROR, REQUIRED_TYPE } from '../../utils/Utilities'
 import { getData } from '../../redux/actions/country'
-import { RootState } from '../../redux/reducers/rootReducers'
+import { AppDispatch, RootState } from '../../redux/reducers/rootReducers'
 import { CountryObj } from '../../redux/actions/country/country-types'
+import { addCovidSurvey } from '../../redux/actions/covidSurvey'
+import { notifySuccess } from '../../utils/toaster'
 
 // Types checking for form
 type InputFormTypes = {
   first_name: string
   last_name: string
   age_group: string
-  date: string
-  country_of_origin: number | null
+  out_break: string
+  countryId: number | null
 }
 
 type SelectCountry = {
@@ -47,15 +49,15 @@ type ParsedFilter = {
 }
 
 const CovidForm = () => {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   // Initial Values for form
   const initialValues = {
     first_name: '',
     last_name: '',
     age_group: '',
-    date: '',
-    country_of_origin: null,
+    out_break: '',
+    countryId: null,
   }
 
   const ageGroup = ['0 - 17', '18 - 35', '36 - 58', '59 - 70', '71 and above']
@@ -90,12 +92,12 @@ const CovidForm = () => {
       .string()
       .typeError(REQUIRED_TYPE('Age group', 'selected'))
       .required(REQUIRED_ERROR('Age group')),
-    date: yup
+    out_break: yup
       .date()
       .typeError(REQUIRED_TYPE('Date', 'selected'))
       .max(new Date(), "Date can't be in future!")
       .required(REQUIRED_ERROR('Valid Date')),
-    country_of_origin: yup
+    countryId: yup
       .number()
       .typeError(REQUIRED_TYPE('Country of origin', 'selected'))
       .required(REQUIRED_ERROR('Country of origin')),
@@ -108,7 +110,7 @@ const CovidForm = () => {
     setValue,
     control, //This object contains methods for registering components into React Hook Form.
     trigger, // Use for manually triggering errors
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm<InputFormTypes>({
     mode: 'all', // ['onBlur','onChange','onSubmit','all'] --> 	Validation will trigger on the blur and change events.
     reValidateMode: 'onChange', // [onChange | onBlur | onSubmit] --> inputs with errors get re-validated
@@ -119,6 +121,17 @@ const CovidForm = () => {
   // Handle Submit Event
   const onSubmit = () => {
     trigger()
+    console.log(getValues())
+    if (isDirty && isValid) {
+      dispatch(addCovidSurvey(getValues())).then((data) => {
+        if (data) {
+          notifySuccess({
+            header: 'Success',
+            message: 'Your survey has been submitted.',
+          })
+        }
+      })
+    }
   }
 
   // Rendering Country Select Field
@@ -126,7 +139,6 @@ const CovidForm = () => {
     return { label: countryObj.name, value: countryObj.id }
   }
 
-  console.log(getValues())
   return (
     <Card className="m-5">
       <CardHeader className="d-flex justify-content-center font-weight-bolder">
@@ -187,7 +199,7 @@ const CovidForm = () => {
               <FormGroup>
                 <Controller
                   control={control}
-                  name="date"
+                  name="out_break"
                   render={({ field }) => (
                     <Flatpickr
                       {...field}
@@ -198,7 +210,7 @@ const CovidForm = () => {
                         dateFormat: 'Y-m-d',
                       }}
                       className={classnames({
-                        'is-invalid': errors['date'],
+                        'is-invalid': errors['out_break'],
                       })}
                       onChange={(date) => {
                         const dateToUpdate = moment(date[0]).format(
@@ -209,8 +221,8 @@ const CovidForm = () => {
                     />
                   )}
                 />
-                {errors && errors.date && errors.date.message && (
-                  <FormFeedback>{errors.date.message}</FormFeedback>
+                {errors && errors.out_break && errors.out_break.message && (
+                  <FormFeedback>{errors.out_break.message}</FormFeedback>
                 )}
               </FormGroup>
             </Col>
@@ -219,7 +231,7 @@ const CovidForm = () => {
               <FormGroup>
                 <Controller
                   control={control}
-                  name="country_of_origin"
+                  name="countryId"
                   render={({ field }) => (
                     <Select
                       placeholder="Select country of origin"
@@ -239,18 +251,14 @@ const CovidForm = () => {
                         }
                       }}
                       className={classnames({
-                        'is-invalid': errors['country_of_origin'],
+                        'is-invalid': errors['countryId'],
                       })}
                     />
                   )}
                 />
-                {errors &&
-                  errors.country_of_origin &&
-                  errors.country_of_origin.message && (
-                    <FormFeedback>
-                      {errors.country_of_origin.message}
-                    </FormFeedback>
-                  )}
+                {errors && errors.countryId && errors.countryId.message && (
+                  <FormFeedback>{errors.countryId.message}</FormFeedback>
+                )}
               </FormGroup>
             </Col>
           </Row>
@@ -292,13 +300,7 @@ const CovidForm = () => {
           </Row>
           <Row>
             <Col className="d-flex justify-content-end">
-              <Button
-                outline
-                color="primary"
-                type="submit"
-                onClick={() => onSubmit()}
-                className="round"
-              >
+              <Button outline color="primary" className="round">
                 Submit
               </Button>
             </Col>
