@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { notifyError } from '../utils/toaster'
-import { handleunAuthorised } from './actions/auth'
+import history from '../../history'
+import { store } from './store'
+import { AuthActions } from './actions/auth/auth-types'
 
 const API = axios.create({
   baseURL: 'http://localhost:8000/',
@@ -11,7 +13,7 @@ export default API
 
 // Axios Request interceptors
 API.interceptors.request.use((req: AxiosRequestConfig) => {
-  const userToken = localStorage.getItem('access_token')
+  const userToken = store.getState().authReducer.token
   if (userToken)
     req.headers = { Authorization: 'Bearer ' + userToken.replace(/^"|"$/g, '') }
   console.log(`[${req.method}] ${req.url}`)
@@ -31,6 +33,7 @@ API.interceptors.response.use(
     return res
   },
   (err: AxiosError) => {
+    const { dispatch } = store
     console.log('Error :')
     console.log(err)
     if (err?.response?.status === 400) {
@@ -50,7 +53,8 @@ API.interceptors.response.use(
         header: 'UnAuthorised',
         message: err?.response?.data?.message,
       })
-      handleunAuthorised()
+      dispatch({ type: AuthActions.USER_UNAUTHORIZE })
+      history.push('/')
     }
     return err
   }

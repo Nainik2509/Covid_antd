@@ -309,4 +309,4 @@ const CovidForm = () => {
   )
 }
 
-export default CovidForm
+export default CovidForm as React.FC

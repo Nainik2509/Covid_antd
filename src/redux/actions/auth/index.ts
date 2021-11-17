@@ -32,5 +32,6 @@ export const handleunAuthorised = () => {
     dispatch({
       type: AuthActions.USER_UNAUTHORIZE,
     })
+    return true
   }
 }
