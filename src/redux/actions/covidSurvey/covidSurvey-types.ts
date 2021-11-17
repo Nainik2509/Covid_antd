@@ -1,6 +1,7 @@
 export enum CovidSurveyActions {
   ADD_COVID_SURVEY = 'ADD_COVID_SURVEY',
   GET_USER_COVID_SURVEY = 'GET_USER_COVID_SURVEY',
+  UPDATE_USER_COVID_SURVEY = 'UPDATE_USER_COVID_SURVEY',
 }
 
 export type covidObj = {
@@ -26,7 +27,12 @@ type GetUserCovidSurvey = {
   payload: covidObj
 }
 
-export type IAction = AddCovidSurvey | GetUserCovidSurvey
+type updateCovidSurvey = {
+  type: CovidSurveyActions.UPDATE_USER_COVID_SURVEY
+  payload: covidObj
+}
+
+export type IAction = AddCovidSurvey | GetUserCovidSurvey | updateCovidSurvey
 
 export type InitialState = {
   covidObj: covidObj | null

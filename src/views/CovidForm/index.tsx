@@ -25,7 +25,11 @@ import { REQUIRED_ERROR, REQUIRED_TYPE } from '../../utils/Utilities'
 import { getData } from '../../redux/actions/country'
 import { AppDispatch, RootState } from '../../redux/reducers/rootReducers'
 import { CountryObj } from '../../redux/actions/country/country-types'
-import { addCovidSurvey, getCovidSurvey } from '../../redux/actions/covidSurvey'
+import {
+  addCovidSurvey,
+  getCovidSurvey,
+  updateCovidSurvey,
+} from '../../redux/actions/covidSurvey'
 import { notifySuccess } from '../../utils/toaster'
 
 // Types checking for form
@@ -160,8 +164,18 @@ const CovidForm = () => {
             })
           }
         })
-      } else {
-        console.log(getValues())
+      } else if (userCovidSurvey) {
+        dispatch(updateCovidSurvey(userCovidSurvey.id, getValues())).then(
+          (data) => {
+            if (data) {
+              notifySuccess({
+                header: 'Success',
+                message: 'Your survey has been updated.',
+              })
+              dispatch(getCovidSurvey())
+            }
+          }
+        )
       }
     }
   }
