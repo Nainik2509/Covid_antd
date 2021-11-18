@@ -55,6 +55,11 @@ API.interceptors.response.use(
       })
       dispatch({ type: AuthActions.USER_UNAUTHORIZE })
       history.push('/')
+    } else {
+      notifyError({
+        header: 'Server Error',
+        message: 'Internal Server Error! Try again later',
+      })
     }
     return err
   }

@@ -35,3 +35,13 @@ export const handleunAuthorised = () => {
     return true
   }
 }
+
+// ** API to handle unauthorised user
+export const handleLogOut = () => {
+  return async (dispatch: Dispatch<IAction>) => {
+    dispatch({
+      type: AuthActions.USER_UNAUTHORIZE,
+    })
+    return true
+  }
+}
