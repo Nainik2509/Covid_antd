@@ -3,8 +3,8 @@ import { Switch } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 
-const CovidForm = React.lazy(() => import('../views/CovidForm'))
-const LoginPage = React.lazy(() => import('../views/Login'))
+const CovidForm = React.lazy(() => import('../views/CovidFormAntd'))
+const LoginPage = React.lazy(() => import('../views/LoginAntd'))
 
 export const Router = () => {
   // Country Listing from store

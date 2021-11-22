@@ -2,31 +2,20 @@ import React from 'react'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
-import classnames from 'classnames'
+import { Form, Input, Button, Layout, Row, Col, Typography } from 'antd'
+const { Title } = Typography
+const { Content } = Layout
+import signinbg from '../../assets/images/img-signin.jpg'
 import {
   MIN_LENGTH,
   REQUIRED_ERROR,
   REQUIRED_TYPE,
 } from '../../utils/Utilities'
-
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Form,
-  FormFeedback,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-} from 'reactstrap'
-import { handleLogin } from '../../redux/actions/auth'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 import { AppDispatch } from '../../redux/reducers/rootReducers'
+import { handleLogin } from '../../redux/actions/auth'
 import { notifySuccess } from '../../utils/toaster'
-import { useDispatch } from 'react-redux'
 
 // Types checking for form
 type InputFormTypes = {
@@ -34,7 +23,7 @@ type InputFormTypes = {
   password: string
 }
 
-const Login = () => {
+const LoginFormAntd = () => {
   const dispatch: AppDispatch = useDispatch()
   const history = useHistory()
 
@@ -54,8 +43,8 @@ const Login = () => {
     password: yup
       .string()
       .typeError(REQUIRED_TYPE('Password', 'a string'))
-      .min(6, MIN_LENGTH('Password', 6))
-      .required(REQUIRED_ERROR('Password')),
+      .required(REQUIRED_ERROR('Password'))
+      .min(6, MIN_LENGTH('Password', 6)),
   })
 
   // React-Hook-Form COnfiguration
@@ -89,72 +78,80 @@ const Login = () => {
   }
 
   return (
-    <React.Fragment>
-      <Card
-        className="mx-auto justify-content-center mt-5"
-        style={{ maxWidth: '400px' }}
-      >
-        <CardHeader className="d-flex justify-content-center font-weight-bolder">
-          Login
-        </CardHeader>
-        <CardBody className="p-5">
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Row>
-              <Label>Enter your email Id</Label>
-              <FormGroup>
+    <Layout className="layout-default layout-signin">
+      <Content className="signin">
+        <Row gutter={[24, 0]} justify="space-around">
+          <Col className="my-auto">
+            <Title className="mb-15">Sign In</Title>
+            <Title className="font-regular text-muted" level={5}>
+              Enter your email and password to sign in
+            </Title>
+            <Form
+              onFinish={handleSubmit(onSubmit)}
+              layout="vertical"
+              className="row-col"
+            >
+              <Form.Item
+                className="username"
+                label="Email"
+                name="email"
+                hasFeedback={errors && errors['email'] ? true : false}
+                validateStatus={errors && errors['email'] ? 'error' : 'success'}
+                help={errors.email?.message}
+              >
                 <Controller
                   control={control}
                   name="email"
                   render={({ field }) => (
                     <Input
+                      {...field}
                       type="email"
                       placeholder="Enter your email Id"
-                      {...field}
-                      className={classnames({
-                        'is-invalid': errors['email'],
-                      })}
                     />
                   )}
                 />
-                {errors && errors.email && errors.email.message && (
-                  <FormFeedback tooltip>{errors.email.message}</FormFeedback>
-                )}
-              </FormGroup>
-            </Row>
-            <Row>
-              <Label>Enter your email Id</Label>
-              <FormGroup>
+              </Form.Item>
+              <Form.Item
+                className="username"
+                label="Password"
+                name="password"
+                hasFeedback
+                validateStatus={
+                  errors && errors['password'] ? 'error' : 'success'
+                }
+                help={errors.password?.message}
+              >
                 <Controller
                   control={control}
                   name="password"
                   render={({ field }) => (
-                    <Input
+                    <Input.Password
+                      {...field}
                       type="password"
                       placeholder="Enter your password"
-                      {...field}
-                      className={classnames({
-                        'is-invalid': errors['password'],
-                      })}
                     />
                   )}
                 />
-                {errors && errors.password && errors.password.message && (
-                  <FormFeedback tooltip>{errors.password.message}</FormFeedback>
-                )}
-              </FormGroup>
-            </Row>
-            <Row>
-              <Col className="d-flex justify-content-end">
-                <Button outline color="primary" className="round">
-                  Submit
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ width: '100%' }}
+                >
+                  SIGN IN
                 </Button>
-              </Col>
-            </Row>
-          </Form>
-        </CardBody>
-      </Card>
-    </React.Fragment>
+              </Form.Item>
+            </Form>
+          </Col>
+          <Col className="sign-img" style={{ padding: 12 }}>
+            <img src={signinbg} alt="" />
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
   )
 }
 
-export default Login as React.FC
+export default LoginFormAntd as React.FC

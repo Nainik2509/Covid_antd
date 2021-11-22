@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 // React Flatpickr CSS
 import 'flatpickr/dist/themes/material_blue.css'
 import 'react-toastify/dist/ReactToastify.css'
+import 'antd/dist/antd.css'
 
 ReactDOM.render(
   <React.StrictMode>

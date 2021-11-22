@@ -31,6 +31,7 @@ import {
   updateCovidSurvey,
 } from '../../redux/actions/covidSurvey'
 import { notifySuccess } from '../../utils/toaster'
+import '../../assets/css/form_styles.css'
 
 // Types checking for form
 type InputFormTypes = {
@@ -194,15 +195,15 @@ const CovidForm = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
             <Col lg={6} md={6} sm={12}>
-              <Label>Enter your first name</Label>
+              <Label for="first_name">Enter your first name</Label>
               <FormGroup>
                 <Controller
                   control={control}
                   name="first_name"
                   render={({ field }) => (
                     <Input
-                      placeholder="Enter your first name"
                       {...field}
+                      placeholder="Enter your first name"
                       className={classnames({
                         'is-invalid': errors['first_name'],
                       })}
@@ -210,7 +211,9 @@ const CovidForm = () => {
                   )}
                 />
                 {errors && errors.first_name && errors.first_name.message && (
-                  <FormFeedback>{errors.first_name.message}</FormFeedback>
+                  <FormFeedback tooltip>
+                    {errors.first_name.message}
+                  </FormFeedback>
                 )}
               </FormGroup>
             </Col>
@@ -231,7 +234,9 @@ const CovidForm = () => {
                   )}
                 />
                 {errors && errors.last_name && errors.last_name.message && (
-                  <FormFeedback>{errors.last_name.message}</FormFeedback>
+                  <FormFeedback tooltip>
+                    {errors.last_name.message}
+                  </FormFeedback>
                 )}
               </FormGroup>
             </Col>
@@ -268,7 +273,9 @@ const CovidForm = () => {
                   )}
                 />
                 {errors && errors.out_break && errors.out_break.message && (
-                  <FormFeedback>{errors.out_break.message}</FormFeedback>
+                  <FormFeedback tooltip>
+                    {errors.out_break.message}
+                  </FormFeedback>
                 )}
               </FormGroup>
             </Col>
@@ -317,7 +324,9 @@ const CovidForm = () => {
                   )}
                 />
                 {errors && errors.countryId && errors.countryId.message && (
-                  <FormFeedback>{errors.countryId.message}</FormFeedback>
+                  <FormFeedback tooltip>
+                    {errors.countryId.message}
+                  </FormFeedback>
                 )}
               </FormGroup>
             </Col>
@@ -354,7 +363,9 @@ const CovidForm = () => {
                   />
                 ))}
                 {errors && errors.age_group && errors.age_group.message && (
-                  <FormFeedback>{errors.age_group.message}</FormFeedback>
+                  <FormFeedback tooltip>
+                    {errors.age_group.message}
+                  </FormFeedback>
                 )}
               </FormGroup>
             </Col>

@@ -1,0 +1,16 @@
+.invalid-tooltip {
+  position: inherit;
+  top: 100%;
+  z-index: 5;
+  min-width: 26%;
+  padding: 0.25 rem 0.5 rem;
+  margin-top: 0.1 rem;
+  font-size: 0.875rem;
+  color: #fff;
+  background-color: rgba(220, 53, 69, 0.9);
+  border-radius: 0.25 rem;
+}
+
+.is-invalid .invalid-tooltip {
+  display: inline-block;
+}
