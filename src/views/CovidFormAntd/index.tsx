@@ -27,8 +27,8 @@ const { Content } = Layout
 import {
   ageGroup,
   BooleanType,
-  MIN_CHECKED,
   MIN_RATE,
+  MIN_SELECTED,
   REQUIRED_ERROR,
   REQUIRED_TYPE,
   symptomsGroup,
@@ -138,7 +138,7 @@ const CovidForm = () => {
       then: yup
         .array(yup.string())
         .typeError(REQUIRED_TYPE('Symptoms', 'selected'))
-        .min(1, MIN_CHECKED('Symptoms', 1))
+        .min(1, MIN_SELECTED('Symptoms', 1))
         .required(REQUIRED_ERROR('Symptoms')),
     }),
     out_break: yup

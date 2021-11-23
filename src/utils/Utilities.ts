@@ -5,6 +5,8 @@ export const MIN_LENGTH = (name: string, type: number) =>
   `${name} must be at least ${type} characters long.`
 export const MIN_CHECKED = (name: string, type: number) =>
   `At least ${type} option must be checked for ${name} .`
+export const MIN_SELECTED = (name: string, type: number) =>
+  `At least ${type} option must be selected for ${name} .`
 export const MIN_RATE = (name: string, type: number) =>
   `A min rate of ${type} should be there.`
 
