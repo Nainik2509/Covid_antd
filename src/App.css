@@ -6,6 +6,20 @@
   display: flex;
 }
 
+.logo {
+  height: 32px;
+  margin: 16px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: rgba(255, 255, 255, 0.3); */
+}
+.logo span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
 #components-layout-demo-custom-trigger .trigger {
   padding: 0 24px;
   font-size: 18px;
