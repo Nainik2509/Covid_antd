@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Redirect } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import Main from '../layout/Main'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
@@ -18,7 +18,6 @@ export const Router = () => {
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/survey-list" component={SurveyList} />
         <PrivateRoute exact path="/add-survey" component={CovidForm} />
-        <Redirect from="*" to="/dashboard" />
       </Main>
       <PublicRoute render={() => <h1>404 Page not found</h1>} />
     </Switch>
