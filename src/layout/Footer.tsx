@@ -7,7 +7,7 @@ const FooterSection: React.FC = () => {
   return (
     <Footer
       className="site-layout-background"
-      style={{ background: '#fafafa', textAlign: 'center' }}
+      style={{ background: '#f2faff', textAlign: 'center' }}
     >
       <div className="copyright">
         © {new Date().getFullYear()}, made with

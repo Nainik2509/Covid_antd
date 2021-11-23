@@ -11,14 +11,24 @@ import {
 
 type TSideBarProps = {
   collapsed: boolean
+  toggle: () => void
 }
 
-const SideBar: React.FC<TSideBarProps> = ({ collapsed }) => {
+const SideBar: React.FC<TSideBarProps> = ({ collapsed, toggle }) => {
   let { pathname } = useLocation()
   pathname = pathname.replace('/', '')
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Sider
+      breakpoint="lg"
+      collapsedWidth="0"
+      onCollapse={() => {
+        toggle()
+      }}
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+    >
       <PerfectScrollbar>
         <div className="logo">COVID</div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>

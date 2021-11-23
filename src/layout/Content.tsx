@@ -10,7 +10,7 @@ type TMainProps = {
 const ContentSection: React.FC<TMainProps> = ({ children }) => {
   return (
     <PerfectScrollbar>
-      <Content style={{ margin: '24px 16px 0', overflow: 'auto' }}>
+      <Content style={{ margin: '24px 16px 10px', overflow: 'initial' }}>
         <div className="site-layout-background" style={{ padding: 24 }}>
           {children}
         </div>

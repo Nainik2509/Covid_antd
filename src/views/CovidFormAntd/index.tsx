@@ -12,15 +12,17 @@ import {
   Radio,
   Space,
   Button,
-  Checkbox,
+  // Checkbox,
   Typography,
   Rate,
+  Select,
 } from 'antd'
-const { Title, Text } = Typography
-const { Content } = Layout
 import { Controller, useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+const { Title, Text } = Typography
+const { Content } = Layout
 
 import {
   ageGroup,
@@ -258,6 +260,10 @@ const CovidForm = () => {
     return { label: countryObj.name, value: countryObj.id }
   }
 
+  // Rendering Country Select Field
+  const renderSymptomsOption = (data: string): any => {
+    return { label: data, value: data }
+  }
   return (
     <Content style={{ padding: '15px' }}>
       <Title level={3} style={{ textAlign: 'center', marginBottom: '50px' }}>
@@ -462,7 +468,7 @@ const CovidForm = () => {
             <Col xs={24} sm={24} md={24} lg={24} xl={24}>
               <Form.Item
                 className="username"
-                label="What are the main symptoms of the virus? (Check all that apply)"
+                label="What are the main symptoms of the virus? (Select all that apply)"
                 colon={false}
                 name="symptoms"
                 validateStatus={
@@ -474,15 +480,28 @@ const CovidForm = () => {
                   control={control}
                   name="symptoms"
                   render={({ field }) => (
-                    <Checkbox.Group {...field} style={{ width: '100%' }}>
-                      <Row style={{ width: '100%' }}>
-                        {symptomsGroup.map((data, i) => (
-                          <Col key={i} xs={12} sm={12} md={6} lg={6} xl={6}>
-                            <Checkbox value={data}>{data}</Checkbox>
-                          </Col>
-                        ))}
-                      </Row>
-                    </Checkbox.Group>
+                    <Select
+                      {...field}
+                      allowClear
+                      autoClearSearchValue
+                      showArrow
+                      mode="multiple"
+                      placeholder="Please select all that apply"
+                      style={{ width: '100%' }}
+                      options={
+                        symptomsGroup && symptomsGroup.map(renderSymptomsOption)
+                      }
+                    />
+
+                    // <Checkbox.Group {...field} style={{ width: '100%' }}>
+                    //   <Row style={{ width: '100%' }}>
+                    //     {symptomsGroup.map((data, i) => (
+                    //       <Col key={i} xs={12} sm={12} md={6} lg={6} xl={6}>
+                    //         <Checkbox value={data}>{data}</Checkbox>
+                    //       </Col>
+                    //     ))}
+                    //   </Row>
+                    // </Checkbox.Group>
                   )}
                 />
               </Form.Item>
