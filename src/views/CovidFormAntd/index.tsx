@@ -42,7 +42,6 @@ import {
   updateCovidSurvey,
 } from '../../redux/actions/covidSurvey'
 import { notifySuccess } from '../../utils/toaster'
-import '../../assets/css/form_styles.css'
 
 // Types checking for form
 type InputFormTypes = {
