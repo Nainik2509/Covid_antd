@@ -40,3 +40,7 @@
   background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 }
+
+.ant-typography kbd {
+  color: black;
+}

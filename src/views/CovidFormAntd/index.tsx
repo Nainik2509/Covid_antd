@@ -265,7 +265,7 @@ const CovidForm = () => {
       </Title>
       <Form onFinish={handleSubmit(onSubmit)} className="row-col">
         <Row gutter={[48, 0]}>
-          <Col xs={12} sm={24} md={12} lg={12} xl={12}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <Form.Item
               className="username"
               label="Enter your first name"
@@ -285,7 +285,7 @@ const CovidForm = () => {
               />
             </Form.Item>
           </Col>
-          <Col xs={12} sm={24} md={12} lg={12} xl={12}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <Form.Item
               className="username"
               label="Enter your last name"
@@ -307,7 +307,7 @@ const CovidForm = () => {
           </Col>
         </Row>
         <Row gutter={[48, 0]}>
-          <Col xs={12} sm={24} md={12} lg={12} xl={12}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <Form.Item
               className="username"
               label="Approximately when did you first hear about the COVID-19 outbreak?"
@@ -341,7 +341,7 @@ const CovidForm = () => {
               />
             </Form.Item>
           </Col>
-          <Col xs={12} sm={24} md={12} lg={12} xl={12}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <Form.Item
               className="username"
               label="Country of origin"
@@ -400,10 +400,10 @@ const CovidForm = () => {
           </Col>
         </Row>
         <Row gutter={[48, 0]}>
-          <Col xs={12} sm={24} md={12} lg={12} xl={12}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <Form.Item
               className="username"
-              label="Approximately when did you first heaWhich age group do you fall under?"
+              label="Which age group do you fall under?"
               colon={false}
               name="age_group"
               validateStatus={
@@ -428,9 +428,7 @@ const CovidForm = () => {
               />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={[48, 0]}>
-          <Col xs={12} sm={24} md={12} lg={12} xl={12}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <Form.Item
               className="username"
               label="Are your covid infectious?"
@@ -446,7 +444,7 @@ const CovidForm = () => {
                 name="infected"
                 render={({ field }) => (
                   <Radio.Group {...field}>
-                    <Space direction="vertical">
+                    <Space>
                       {BooleanType.map((data, i) => (
                         <Radio key={i} value={data}>
                           {data ? 'Yes' : 'No'}
@@ -458,8 +456,10 @@ const CovidForm = () => {
               />
             </Form.Item>
           </Col>
-          {watchInfected && (
-            <Col xs={12} sm={24} md={12} lg={12} xl={12}>
+        </Row>
+        {watchInfected && (
+          <Row gutter={[48, 0]}>
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
               <Form.Item
                 className="username"
                 label="What are the main symptoms of the virus? (Check all that apply)"
@@ -477,7 +477,7 @@ const CovidForm = () => {
                     <Checkbox.Group {...field} style={{ width: '100%' }}>
                       <Row style={{ width: '100%' }}>
                         {symptomsGroup.map((data, i) => (
-                          <Col key={i} span={8}>
+                          <Col key={i} xs={12} sm={12} md={6} lg={6} xl={6}>
                             <Checkbox value={data}>{data}</Checkbox>
                           </Col>
                         ))}
@@ -487,134 +487,126 @@ const CovidForm = () => {
                 />
               </Form.Item>
             </Col>
-          )}
-        </Row>
+          </Row>
+        )}
         <Row gutter={[48, 0]} style={{ width: '100%' }}>
-          <Col style={{ width: '100%' }}>
-            <Title level={3}>
-              {`Rate your country's Health Department in the following aspects:`}
-            </Title>
-            <Row>
-              <Col span={8}>
-                <Text strong>Health and hygiene awareness</Text>
-              </Col>
-              <Col span={16}>
-                <Form.Item
+          <Row style={{ width: '100%', padding: '10px 24px' }}>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+              <Text mark>
+                {`Rate your country's Health Department in the following aspects:`}
+              </Text>
+            </Col>
+          </Row>
+          <Row style={{ width: '100%', padding: '0px 24px' }}>
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+              <Text keyboard>Health and hygiene awareness</Text>
+            </Col>
+            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+              <Form.Item
+                name="awareness"
+                validateStatus={
+                  errors && errors['awareness'] ? 'error' : 'success'
+                }
+                help={errors.awareness?.message}
+              >
+                <Controller
+                  control={control}
                   name="awareness"
-                  validateStatus={
-                    errors && errors['awareness'] ? 'error' : 'success'
-                  }
-                  help={errors.awareness?.message}
-                >
-                  <Controller
-                    control={control}
-                    name="awareness"
-                    render={({ field }) => <Rate allowHalf {...field} />}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Text strong>Travel limitations</Text>
-              </Col>
-              <Col span={16}>
-                <Form.Item
+                  render={({ field }) => <Rate allowHalf {...field} />}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+              <Text keyboard>Travel limitations</Text>
+            </Col>
+            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+              <Form.Item
+                name="limitations"
+                validateStatus={
+                  errors && errors['limitations'] ? 'error' : 'success'
+                }
+                help={errors.limitations?.message}
+              >
+                <Controller
+                  control={control}
                   name="limitations"
-                  validateStatus={
-                    errors && errors['limitations'] ? 'error' : 'success'
-                  }
-                  help={errors.limitations?.message}
-                >
-                  <Controller
-                    control={control}
-                    name="limitations"
-                    render={({ field }) => <Rate allowHalf {...field} />}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Text strong>Screening and tests to detect the virus</Text>
-              </Col>
-              <Col span={16}>
-                <Form.Item
+                  render={({ field }) => <Rate allowHalf {...field} />}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+              <Text keyboard>Screening and tests to detect the virus</Text>
+            </Col>
+            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+              <Form.Item
+                name="detect"
+                validateStatus={
+                  errors && errors['detect'] ? 'error' : 'success'
+                }
+                help={errors.detect?.message}
+              >
+                <Controller
+                  control={control}
                   name="detect"
-                  validateStatus={
-                    errors && errors['detect'] ? 'error' : 'success'
-                  }
-                  help={errors.detect?.message}
-                >
-                  <Controller
-                    control={control}
-                    name="detect"
-                    render={({ field }) => <Rate allowHalf {...field} />}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Text strong>Availability of hospitals</Text>
-              </Col>
-              <Col span={16}>
-                <Form.Item
+                  render={({ field }) => <Rate allowHalf {...field} />}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+              <Text keyboard>Availability of hospitals</Text>
+            </Col>
+            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+              <Form.Item
+                name="hospitals"
+                validateStatus={
+                  errors && errors['hospitals'] ? 'error' : 'success'
+                }
+                help={errors.hospitals?.message}
+              >
+                <Controller
+                  control={control}
                   name="hospitals"
-                  validateStatus={
-                    errors && errors['hospitals'] ? 'error' : 'success'
-                  }
-                  help={errors.hospitals?.message}
-                >
-                  <Controller
-                    control={control}
-                    name="hospitals"
-                    render={({ field }) => <Rate allowHalf {...field} />}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Text strong>Availability of healthcare professionals</Text>
-              </Col>
-              <Col span={16}>
-                <Form.Item
+                  render={({ field }) => <Rate allowHalf {...field} />}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+              <Text keyboard>Availability of healthcare professionals</Text>
+            </Col>
+            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+              <Form.Item
+                name="healthcare"
+                validateStatus={
+                  errors && errors['healthcare'] ? 'error' : 'success'
+                }
+                help={errors.healthcare?.message}
+              >
+                <Controller
+                  control={control}
                   name="healthcare"
-                  validateStatus={
-                    errors && errors['healthcare'] ? 'error' : 'success'
-                  }
-                  help={errors.healthcare?.message}
-                >
-                  <Controller
-                    control={control}
-                    name="healthcare"
-                    render={({ field }) => <Rate allowHalf {...field} />}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Text strong>Quality of treatment</Text>
-              </Col>
-              <Col span={16}>
-                <Form.Item
+                  render={({ field }) => <Rate allowHalf {...field} />}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+              <Text keyboard>Quality of treatment</Text>
+            </Col>
+            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+              <Form.Item
+                name="treatment"
+                validateStatus={
+                  errors && errors['treatment'] ? 'error' : 'success'
+                }
+                help={errors.treatment?.message}
+              >
+                <Controller
+                  control={control}
                   name="treatment"
-                  validateStatus={
-                    errors && errors['treatment'] ? 'error' : 'success'
-                  }
-                  help={errors.treatment?.message}
-                >
-                  <Controller
-                    control={control}
-                    name="treatment"
-                    render={({ field }) => <Rate allowHalf {...field} />}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-          </Col>
+                  render={({ field }) => <Rate allowHalf {...field} />}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </Row>
         <Row>
           <Col span={6} offset={18} className="d-flex justify-content-end">
