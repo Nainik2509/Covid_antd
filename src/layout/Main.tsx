@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { Layout, Menu } from 'antd'
 
-const { Header, Footer, Sider, Content } = Layout
+const { Footer, Sider, Content } = Layout
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
@@ -13,6 +11,7 @@ import {
 import { NavLink, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/reducers/rootReducers'
+import Header from './Header'
 
 const Main: React.FC = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)
@@ -20,7 +19,6 @@ const Main: React.FC = ({ children }) => {
   const authToken = useSelector((state: RootState) => state.authReducer.token)
   if (!authToken || authToken === '') return <Redirect to="/login" />
 
-  console.log('WWWWWWWWWWWWWWWWWWW', authToken)
   const toggle = () => {
     setCollapsed(!collapsed)
   }
@@ -53,21 +51,13 @@ const Main: React.FC = ({ children }) => {
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
               <NavLink style={{ textDecoration: 'none' }} to="/add-survey">
-                <span className="label">Add Survey</span>
+                <span className="label">Your Survey</span>
               </NavLink>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout" style={{ marginLeft: 200 }}>
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(
-              collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-              {
-                className: 'trigger',
-                onClick: toggle,
-              }
-            )}
-          </Header>
+          <Header collapsed={collapsed} toggle={toggle} />
           <Content style={{ margin: '24px 16px 0', overflow: 'auto' }}>
             <div className="site-layout-background" style={{ padding: 24 }}>
               {children}

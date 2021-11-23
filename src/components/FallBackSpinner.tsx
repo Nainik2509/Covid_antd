@@ -1,9 +1,9 @@
-import { Spinner } from 'reactstrap'
+import { Spin } from 'antd'
 
 export const FallBackSpinner = () => {
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <Spinner color="primary"></Spinner>
+    <div className="antd-example-spinner">
+      <Spin />
     </div>
   )
 }
