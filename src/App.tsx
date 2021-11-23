@@ -7,6 +7,7 @@ import { Router } from './router/Router'
 import 'antd/dist/antd.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
+import 'react-perfect-scrollbar/dist/css/styles.css'
 import './App.css'
 
 function App() {

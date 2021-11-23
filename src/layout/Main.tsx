@@ -27,7 +27,7 @@ const Main: React.FC<TMainProps> = ({ children }) => {
     <React.Fragment>
       <Layout>
         <SideBar collapsed={collapsed} />
-        <Layout className="site-layout" style={{ marginLeft: 200 }}>
+        <Layout className="site-layout">
           <Header collapsed={collapsed} toggle={toggle} />
           <ContentSection>{children}</ContentSection>
           <FooterSection />
