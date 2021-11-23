@@ -254,14 +254,17 @@ const CovidForm = () => {
     }
   }
 
-  console.log(getValues())
   // Rendering Country Select Field
   const renderCountryOption = (countryObj: CountryObj): SelectCountry => {
     return { label: countryObj.name, value: countryObj.id }
   }
 
   return (
-    <Card title="Card title" style={{ margin: '5px' }}>
+    <Card
+      title="Health Care Survey-Corona Virus (COVID-19) Awareness Survey"
+      headStyle={{ display: 'flex', justifyContent: 'center' }}
+      style={{ margin: '15px' }}
+    >
       <Content style={{ padding: '15px' }}>
         <Form onFinish={handleSubmit(onSubmit)} className="row-col">
           <Row gutter={[48, 0]}>
