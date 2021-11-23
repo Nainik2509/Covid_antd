@@ -4,10 +4,10 @@ import { PersistGate } from 'redux-persist/lib/integration/react'
 import { FallBackSpinner } from './components/FallBackSpinner'
 import { persistor, store } from './redux/store'
 import { Router } from './router/Router'
-// import './App.css'
 import 'antd/dist/antd.css'
 import './assets/css/main.css'
 import './assets/css/responsive.css'
+import './App.css'
 
 function App() {
   return (
