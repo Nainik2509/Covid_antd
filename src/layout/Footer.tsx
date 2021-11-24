@@ -1,5 +1,5 @@
 import { Layout } from 'antd'
-import { HeartFilled } from '@ant-design/icons'
+import { HeartTwoTone } from '@ant-design/icons'
 
 const { Footer } = Layout
 
@@ -10,10 +10,10 @@ const FooterSection: React.FC = () => {
       style={{ background: '#f2faff', textAlign: 'center' }}
     >
       <div className="copyright">
-        © {new Date().getFullYear()}, made with
-        {<HeartFilled />} by
+        © {new Date().getFullYear()}, made with &nbsp;
+        {<HeartTwoTone twoToneColor="#eb2f96" />} by&nbsp;
         <a href="#pablo" className="font-weight-bold" target="_blank">
-          Nainik Mehta
+          Nainik Mehta &nbsp;
         </a>
         for a better web.
       </div>

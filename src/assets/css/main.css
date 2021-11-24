@@ -58,14 +58,13 @@ img {
 .ant-btn,
 .ant-radio-group .ant-radio-button-wrapper {
   font-weight: 600;
-  font-size: 12px;
-  height: 40px;
+  font-size: 13px;
+  height: 35px;
   padding: 0 15px;
-  line-height: 40px;
 }
 .ant-btn {
   box-shadow: 0 2px 4px rgb(0 0 0 / 7%);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .layout-sign-up .ant-layout-footer {
   padding: 24px 50px;

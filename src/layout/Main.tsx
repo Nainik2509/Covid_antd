@@ -8,6 +8,7 @@ import Header from './Header'
 import SideBar from './SideBar'
 import ContentSection from './Content'
 import FooterSection from './Footer'
+import { FallBackSpinner } from '../components/FallBackSpinner'
 
 type TMainProps = {
   children: React.ReactNode
@@ -29,7 +30,9 @@ const Main: React.FC<TMainProps> = ({ children }) => {
         <SideBar collapsed={collapsed} toggle={toggle} />
         <Layout className="site-layout">
           <Header collapsed={collapsed} toggle={toggle} />
-          <ContentSection>{children}</ContentSection>
+          <React.Suspense fallback={<FallBackSpinner />}>
+            <ContentSection>{children}</ContentSection>
+          </React.Suspense>
           <FooterSection />
         </Layout>
       </Layout>

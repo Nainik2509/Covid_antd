@@ -65,6 +65,11 @@ type SelectCountry = {
   value: number
 }
 
+type SelectSymptoms = {
+  label: string
+  value: string
+}
+
 type ParsedFilter = {
   page: number
   perPage: number
@@ -73,6 +78,8 @@ type ParsedFilter = {
 
 const CovidForm = () => {
   const dispatch: AppDispatch = useDispatch()
+
+  const [loading, setLoading] = useState<boolean>(false)
 
   // Initial Values for form
   const initialValues = {
@@ -97,7 +104,7 @@ const CovidForm = () => {
     search: '',
   })
 
-  const [addNew, setAddNew] = useState(true)
+  const [addNew, setAddNew] = useState<boolean>(true)
 
   const userCovidSurvey = useSelector(
     (state: RootState) => state.covidSurveyReducer.covidObj
@@ -230,8 +237,10 @@ const CovidForm = () => {
     trigger()
     if (isValid) {
       if (addNew) {
+        setLoading(true)
         dispatch(addCovidSurvey(getValues())).then((data) => {
           if (data) {
+            setLoading(false)
             notifySuccess({
               header: 'Success',
               message: 'Your survey has been submitted.',
@@ -239,9 +248,11 @@ const CovidForm = () => {
           }
         })
       } else if (userCovidSurvey) {
+        setLoading(true)
         dispatch(updateCovidSurvey(userCovidSurvey.id, getValues())).then(
           (data) => {
             if (data) {
+              setLoading(false)
               notifySuccess({
                 header: 'Success',
                 message: 'Your survey has been updated.',
@@ -260,7 +271,7 @@ const CovidForm = () => {
   }
 
   // Rendering Country Select Field
-  const renderSymptomsOption = (data: string): any => {
+  const renderSymptomsOption = (data: string): SelectSymptoms => {
     return { label: data, value: data }
   }
   return (
@@ -473,6 +484,7 @@ const CovidForm = () => {
                 validateStatus={
                   errors && errors['symptoms'] ? 'error' : 'success'
                 }
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 help={errors.symptoms && (errors.symptoms as any).message}
               >
                 <Controller
@@ -628,7 +640,14 @@ const CovidForm = () => {
         </Row>
         <Row>
           <Col span={6} offset={18} className="d-flex justify-content-end">
-            <Button type="primary" shape="round" htmlType="submit">
+            <Button
+              type="primary"
+              loading={loading}
+              disabled={loading}
+              shape="round"
+              htmlType="submit"
+              ghost
+            >
               {addNew ? 'Submit' : 'Update'}
             </Button>
           </Col>

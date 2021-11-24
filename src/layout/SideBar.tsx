@@ -21,7 +21,7 @@ const SideBar: React.FC<TSideBarProps> = ({ collapsed, toggle }) => {
   return (
     <Sider
       breakpoint="lg"
-      collapsedWidth="0"
+      collapsedWidth="60"
       onCollapse={() => {
         toggle()
       }}
