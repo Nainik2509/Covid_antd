@@ -1,5 +1,8 @@
-import * as yup from 'yup'
 import moment from 'moment'
+import * as yup from 'yup'
+import { Controller, useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Form,
@@ -17,9 +20,6 @@ import {
   Rate,
   Select,
 } from 'antd'
-import { Controller, useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 const { Title, Text } = Typography
 const { Content } = Layout
@@ -34,31 +34,18 @@ import {
   symptomsGroup,
 } from '../../utils/Utilities'
 import { getData } from '../../redux/actions/country'
-import { AppDispatch, RootState } from '../../redux/reducers/rootReducers'
-import { CountryObj } from '../../redux/actions/country/country-types'
 import {
   addCovidSurvey,
   getCovidSurvey,
   updateCovidSurvey,
 } from '../../redux/actions/covidSurvey'
+import { AppDispatch, RootState } from '../../redux/reducers/rootReducers'
 import { notifySuccess } from '../../utils/toaster'
 
+import { CountryObj } from '../../redux/actions/country/country-types'
 // Types checking for form
-type InputFormTypes = {
-  first_name: string
-  last_name: string
-  age_group: string
-  infected: boolean
-  symptoms: string[]
-  awareness: number
-  limitations: number
-  detect: number
-  hospitals: number
-  healthcare: number
-  treatment: number
-  out_break: string
-  countryId: number | null
-}
+import { covidFormData as InputFormTypes } from '../../redux/actions/covidSurvey/covidSurvey-types'
+import { ParsedFilter } from '../../helpers/common-types'
 
 type SelectCountry = {
   label: string
@@ -68,12 +55,6 @@ type SelectCountry = {
 type SelectSymptoms = {
   label: string
   value: string
-}
-
-type ParsedFilter = {
-  page: number
-  perPage: number
-  search: string
 }
 
 const CovidForm = () => {

@@ -1,7 +1,26 @@
+import { ParsedFilter } from '../../../helpers/common-types'
+
 export enum CovidSurveyActions {
   ADD_COVID_SURVEY = 'ADD_COVID_SURVEY',
   GET_USER_COVID_SURVEY = 'GET_USER_COVID_SURVEY',
+  GET_ALL_PAGINATED_COVID_SURVEY = 'GET_ALL_PAGINATED_COVID_SURVEY',
   UPDATE_USER_COVID_SURVEY = 'UPDATE_USER_COVID_SURVEY',
+}
+
+export type covidFormData = {
+  first_name: string
+  last_name: string
+  age_group: string
+  infected: boolean
+  symptoms: string[]
+  awareness: number
+  limitations: number
+  detect: number
+  hospitals: number
+  healthcare: number
+  treatment: number
+  out_break: string
+  countryId: number | null
 }
 
 export type covidObj = {
@@ -10,11 +29,27 @@ export type covidObj = {
   first_name: string
   last_name: string
   age_group: string
+  infected: boolean
+  symptoms: string[]
+  awareness: number
+  limitations: number
+  detect: number
+  hospitals: number
+  healthcare: number
+  treatment: number
   out_break: string
-  countryId: number
+  countryId: number | null
   status: string
   createdAt: string
   updatedAt: string
+}
+
+type DataListCovidSurvey = {
+  type: CovidSurveyActions.GET_ALL_PAGINATED_COVID_SURVEY
+  payload: covidObj[]
+  totalPages: number
+  count: number
+  params: ParsedFilter
 }
 
 type AddCovidSurvey = {
@@ -32,8 +67,16 @@ type updateCovidSurvey = {
   payload: covidObj
 }
 
-export type IAction = AddCovidSurvey | GetUserCovidSurvey | updateCovidSurvey
+export type IAction =
+  | DataListCovidSurvey
+  | AddCovidSurvey
+  | GetUserCovidSurvey
+  | updateCovidSurvey
 
 export type InitialState = {
   covidObj: covidObj | null
+  covidSurveyList: covidObj[] | []
+  totalPages: number
+  count: number
+  params: ParsedFilter | null
 }

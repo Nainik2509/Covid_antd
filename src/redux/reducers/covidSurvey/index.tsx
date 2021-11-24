@@ -6,6 +6,10 @@ import {
 
 const initialState: InitialState = {
   covidObj: null,
+  covidSurveyList: [],
+  totalPages: 0,
+  count: 0,
+  params: null,
 }
 
 const CountryReducer = (
@@ -13,6 +17,14 @@ const CountryReducer = (
   action: IAction
 ): InitialState => {
   switch (action.type) {
+    case CovidSurveyActions.GET_ALL_PAGINATED_COVID_SURVEY:
+      return {
+        ...state,
+        covidSurveyList: action.payload,
+        totalPages: action.totalPages,
+        count: action.count,
+        params: action.params,
+      }
     case CovidSurveyActions.ADD_COVID_SURVEY:
       return {
         ...state,
