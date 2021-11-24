@@ -58,3 +58,8 @@
 .ant-typography kbd {
   color: black;
 }
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

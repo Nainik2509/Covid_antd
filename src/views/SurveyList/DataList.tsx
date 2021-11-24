@@ -49,7 +49,7 @@ const DataList: React.FC = () => {
   ]
 
   return (
-    <div>
+    <div className="table-responsive">
       <Table<covidObj>
         dataSource={dataList}
         columns={columns}
