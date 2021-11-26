@@ -32,7 +32,7 @@ import {
   REQUIRED_ERROR,
   REQUIRED_TYPE,
   symptomsGroup,
-} from '../../utils/Utilities'
+} from '../../utils/utilities'
 import { getData } from '../../redux/actions/country'
 import {
   addCovidSurvey,

@@ -1,6 +1,7 @@
 import API from '../../api'
 import { AuthActions, IAction } from './auth-types'
 import { Dispatch } from 'redux'
+import { AUTH_LOGIN } from '../../apiEndPoints'
 
 type loginData = {
   email: string
@@ -9,7 +10,7 @@ type loginData = {
 // ** API for user login
 export const handleLogin = (data: loginData) => {
   return async (dispatch: Dispatch<IAction>) => {
-    return API.post(`/api/v1/auth/login`, data).then((response) => {
+    return API.post(`${AUTH_LOGIN}`, data).then((response) => {
       if (response && response.status === 200) {
         dispatch({
           type: AuthActions.USER_LOGIN,

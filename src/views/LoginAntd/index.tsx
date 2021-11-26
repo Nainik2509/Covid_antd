@@ -10,7 +10,7 @@ import {
   MIN_LENGTH,
   REQUIRED_ERROR,
   REQUIRED_TYPE,
-} from '../../utils/Utilities'
+} from '../../utils/utilities'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 import { AppDispatch } from '../../redux/reducers/rootReducers'
