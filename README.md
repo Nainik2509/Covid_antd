@@ -71,7 +71,7 @@ I have setup this boilerplate code using Node Version: `16.13.0` (includes npm `
 - `Public` -> Our base file root index.js and all other resources like logo is there.
 - `src` -> Folder where your whole client configuration and other things will come.
   - `index.tsx` -> This is the main file which start's your client (App Entry Point).
-- `.env` -> All our environment variables..
+- `.env` -> All our environment variables.
 - `.env.example` -> Reference file for `.env`.
 - `.gitognore` -> Files & Folder to be excluded from the git.
 - `package.json` -> React initialization with all our packages that are used.

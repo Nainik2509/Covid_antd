@@ -3,11 +3,13 @@ import { notifyError } from '../utils/toaster'
 import history from '../../history'
 import { store } from './store'
 import { AuthActions } from './actions/auth/auth-types'
-import { BASE_URL_DEVELOPMENT } from './apiEndPoints'
+import { BASE_URL_DEVELOPMENT, BASE_URL_PRODUCTION } from './apiEndPoints'
+
+let baseURL: string = BASE_URL_DEVELOPMENT
+if (process.env.NODE_ENV === 'production') baseURL = BASE_URL_PRODUCTION
 
 const API = axios.create({
-  baseURL: `${BASE_URL_DEVELOPMENT}`,
-  // baseURL: `${BASE_URL_PRODUCTION}`,
+  baseURL,
   responseType: 'json',
 })
 
@@ -15,29 +17,36 @@ export default API
 
 // Axios Request interceptors
 API.interceptors.request.use((req: AxiosRequestConfig) => {
+  console.log('NODEJS ENV', process.env.NODE_ENV)
   const userToken = store.getState().authReducer.token
   if (userToken)
     req.headers = { Authorization: 'Bearer ' + userToken.replace(/^"|"$/g, '') }
-  console.log(`[${req.method}] ${req.url}`)
-  console.log(`Headers :`)
-  console.log(req.headers)
-  console.log(`Params : `)
-  console.log(req.params)
-  console.log(`Data : `)
-  console.log(req.data)
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[${req.method}] ${req.url}`)
+    console.log(`Headers :`)
+    console.log(req.headers)
+    console.log(`Params : `)
+    console.log(req.params)
+    console.log(`Data : `)
+    console.log(req.data)
+  }
   return req
 })
 
 API.interceptors.response.use(
   (res: AxiosResponse) => {
-    console.log('Response : ')
-    console.log(res.data)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Response : ')
+      console.log(res.data)
+    }
     return res
   },
   (err: AxiosError) => {
     const { dispatch } = store
-    console.log('Error :')
-    console.log(err)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Error :')
+      console.log(err)
+    }
     if (err?.response?.status === 400) {
       notifyError({ header: null, message: err?.response?.data?.message })
     }
