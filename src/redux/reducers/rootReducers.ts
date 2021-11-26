@@ -11,5 +11,6 @@ const rootReducer = combineReducers({
 })
 
 export type RootState = ReturnType<typeof rootReducer>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AppDispatch = ThunkDispatch<any, RootState, AnyAction>
 export default rootReducer

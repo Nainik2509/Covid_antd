@@ -3,3 +3,7 @@ export type ParsedFilter = {
   perPage: number
   search: string
 }
+
+export type TTagColor = {
+  [key: string]: string
+}
