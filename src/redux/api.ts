@@ -17,7 +17,6 @@ export default API
 
 // Axios Request interceptors
 API.interceptors.request.use((req: AxiosRequestConfig) => {
-  console.log('NODEJS ENV', process.env.NODE_ENV)
   const userToken = store.getState().authReducer.token
   if (userToken)
     req.headers = { Authorization: 'Bearer ' + userToken.replace(/^"|"$/g, '') }

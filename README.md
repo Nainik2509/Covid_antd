@@ -68,9 +68,34 @@ I have setup this boilerplate code using Node Version: `16.13.0` (includes npm `
   <img src="public/reactstructure.png" alt="Folder Structure"/>
 </h1>
 
+- `build` -> Our build for production will be bundlled in this folder on running `yarn build | npm run build`.
 - `Public` -> Our base file root index.js and all other resources like logo is there.
+- `webpack` -> 
+  - `webpack.common.js` -> Common webpack configuration's rule to be applied.
+  - `webpack.dev.js` -> Development webpack configuration's rule to be applied.
+  - `webpack.prod.js` -> Production webpack configuration's rule to be applied.
+  - `webpack.config.js` -> Merging the common webpack rules with webpack file according to env -> For `yarn start -- dev` && `yarn build -- prod`.
 - `src` -> Folder where your whole client configuration and other things will come.
   - `index.tsx` -> This is the main file which start's your client (App Entry Point).
+  - `App.tsx` -> File where all our components are configured wrapped with persisted store and fallback spinner.
+  - `App.css` -> Base CSS file.
+  - `assets` -> Folder where all our CSS, Images, or Javascript files will come.It will containts all the external resources to be included.
+  - `components` -> Components that can be reused with props will be defined here.
+  - `helpers` -> Common types which can be used in many places can be defined here.
+  - `layout` -> Layout configuration can be defined here -> like common header footer & sidebar which need to be wrapped everywhere can be defined here.
+  - `router` -> All our routes will come in this folder with roles management.
+  - `utils` -> All our constants and general utilities function which are frequently needed can be defined here.
+  - `redux` -> All our API bussiness logics and store setup will be in this folder.
+    - `actions` -> All our redux-actions will be defined here according to each module.
+    - `reducers` -> All our reducers to catch actions will be defined and then combined in the rootReducer.
+    - `store.ts` -> Store configuration with persisted storage.
+    - `api.ts` -> Base axios configuration with Request & Response interceptors.
+    - `apiEndPoints.ts` -> All our end-points are defined in this file.
+  - `views` -> All our components and bussines logics according to modules that needs to be rendered are here.
+- `.history.ts` -> Configuring the browser history.
+- `.babelrc` -> Babel config file.
+- `.prettierrc.js` -> Rules for code formatting using prettier.
+- `.eslintrc.js` -> Eslint rules to be check throughout the code.
 - `.env` -> All our environment variables.
 - `.env.example` -> Reference file for `.env`.
 - `.gitognore` -> Files & Folder to be excluded from the git.
