@@ -3,9 +3,11 @@ import { notifyError } from '../utils/toaster'
 import history from '../../history'
 import { store } from './store'
 import { AuthActions } from './actions/auth/auth-types'
+import { BASE_URL_DEVELOPMENT } from './apiEndPoints'
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/',
+  baseURL: `${BASE_URL_DEVELOPMENT}`,
+  // baseURL: `${BASE_URL_PRODUCTION}`,
   responseType: 'json',
 })
 

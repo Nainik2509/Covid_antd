@@ -1,46 +1,95 @@
-# Getting Started with Create React App
+# ReactJs BoilerPlate Code
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<mark>This Repo consists of the base setup for ReactJs with Redux-Store Setup with Persistent Storage and API integration.</mark>
 
-## Available Scripts
+## Why ReactJs ?
 
-In the project directory, you can run:
+- History :
+  - `2011` - Designed and created in Facebook for internal use.
+  - `2012` - Instagram started using it.
+  - `2013` - Open-sourced.
+  - `2015` - Open-sourced React Native for building native iOS and Android apps.
+- Facts :
+  - React is a library, Not a framework.
+  - It is Flexible.
+    - Generates a statis site using Gatsby.
+    - Add server rendering with Next.js.
+    - Build mobile apps with React Native.
+    - Develop Desktop apps using Electron.
+    - Create a virtual reality website for 360 experiences using React VR.
+  - Great DEV Experience.
+  - Supported by Meta.
+  - Broad Community Support.
 
-### `yarn start`
+<hr/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+###### Built and maintained by Nainik Mehta [Find Me!](#find-me).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Let's Dig Into The Code And Explore!
 
-### `yarn test`
+1. [ReactJs Setup](#1-reactjs-setup)
+2. [Setup The Project](#2-setup-the-project)
+3. [Folder Structure](#3-folder-structure)
+4. [Performance Practices And Future Work (Work In Progress️ ✍️)](#4-performance-practices-and-future-work)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/><br/>
 
-### `yarn build`
+# `1. ReactJs Setup`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I have setup this boilerplate code using Node Version: `16.13.0` (includes npm `8.1.0`) & React: `17.0.2`<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### [📝] Have ReactJs in your System
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Install Nodejs
+   - You can have the Node LTS and configure it from [Nodejs.org](https://reactjs.org/en/download/)<br/>
+     🔗 [**Read More: Getting Started With NodeJS**](https://medium.com/@erickcodes/getting-started-with-node-js-84972881508b)
+2. npm install -g create-react-app
+3. npx create-react-app appName
+4. cd appName ---> code .
+5. npm start (to run)
 
-### `yarn eject`
+## `2. Setup The Project`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- You can clone this repo from command line using `git clone ${repo_url}`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - `git clone https://github.com/NainikCrest/Covid_Survey_Antd.git`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Run `npm install | yarn`
+- Create an `.env` file and add your configuration as per your need similar to reference file `.env.example`
+- You can add your base url for API's and apis endpoints from `/src/redux/apiEndPoints.ts`
+- ## Auth data.
+  - Dummy Email & Password for logging in :
+    - Email: `whiteshark@crest.com` | Password: `111111`
+- Run `npm start | yarn start` -> to start the app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## `3. Folder Structure`
 
-## Learn More
+<h1 align="center">
+  <img src="public/reactstructure.png" alt="Folder Structure"/>
+</h1>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `Public` -> Our base file root index.js and all other resources like logo is there.
+- `src` -> Folder where your whole client configuration and other things will come.
+  - `index.tsx` -> This is the main file which start's your client (App Entry Point).
+- `.env` -> All our environment variables..
+- `.env.example` -> Reference file for `.env`.
+- `.gitognore` -> Files & Folder to be excluded from the git.
+- `package.json` -> React initialization with all our packages that are used.
+- `README.md` -> A general overview of the project.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Find Me!
+
+Wanna Reach Me Out 📌?<br/>
+Reach Me Out At :
+[Nainik Mehta](https://github.com/NainikCrest)
+<a href="https://www.linkedin.com/in/nainik-mehta-25nk12"><img src="src/public/assets/images/linkedin.svg" width="16" height="16"></img></a>
+<a href="https://twitter.com/Nainik25"><img src="src/public/assets/images/twitter.svg" width="16" height="16"></img></a>
+
+<!-- <a href="https://whitelioninfosystems.com/employee/606d5c041c705034c8f53878"><img src="src/public/assets/images/portfolio.png" width="16" height="16"></img></a> -->
+<br/>
+<br/>
+Full Stack Developer | Driving Initiatives In Executing Ideas To Reality And Surplus Them |<br/>
+Let's Connect To Explore 👇<br />
+<a href="https://www.linkedin.com/in/nainik-mehta-25nk12"><img src="src/public/assets/images/linkedin.svg" width="16" height="16"></img></a>
+<a href="https://twitter.com/Nainik25"><img src="src/public/assets/images/twitter.svg" width="16" height="16"></img></a>
+<!-- <a href="https://whitelioninfosystems.com/employee/606d5c041c705034c8f53878"><img src="src/public/assets/images/portfolio.png" width="16" height="16"></img></a> -->
