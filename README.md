@@ -56,8 +56,8 @@ I have setup this boilerplate code using Node Version: `16.13.0` (includes npm `
 
 - Run `npm install | yarn`
 - Create an `.env` file and add your configuration as per your need similar to reference file `.env.example`
-- You can add your base url for API's and apis endpoints from `/src/redux/apiEndPoints.ts`
-- ## Auth data.
+- You can add your base url for API's and apis endpoints in `/src/redux/apiEndPoints.ts`
+- ### Auth data.
   - Dummy Email & Password for logging in :
     - Email: `whiteshark@crest.com` | Password: `111111`
 - Run `npm start | yarn start` -> to start the app.
