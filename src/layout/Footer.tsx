@@ -5,10 +5,7 @@ const { Footer } = Layout
 
 const FooterSection: React.FC = () => {
   return (
-    <Footer
-      className="site-layout-background"
-      style={{ background: '#f2faff', textAlign: 'center' }}
-    >
+    <Footer className="site-layout-background site-layout-background-footer">
       <div className="copyright">
         © {new Date().getFullYear()}, made with &nbsp;
         {<HeartTwoTone twoToneColor="#eb2f96" />} by&nbsp;

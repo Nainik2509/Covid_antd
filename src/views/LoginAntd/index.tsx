@@ -135,17 +135,13 @@ const LoginFormAntd = () => {
               </Form.Item>
 
               <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ width: '100%' }}
-                >
+                <Button className="w-100" type="primary" htmlType="submit">
                   SIGN IN
                 </Button>
               </Form.Item>
             </Form>
           </Col>
-          <Col className="sign-img" style={{ padding: 12 }}>
+          <Col className="sign-img p-12">
             <img src={signinbg} alt="" />
           </Col>
         </Row>

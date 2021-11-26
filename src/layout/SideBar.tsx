@@ -33,17 +33,17 @@ const SideBar: React.FC<TSideBarProps> = ({ collapsed, toggle }) => {
         <div className="logo">COVID</div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
           <Menu.Item key="dashboard" icon={<UserOutlined />}>
-            <NavLink style={{ textDecoration: 'none' }} to="/dashboard">
+            <NavLink className="no-text-decoration" to="/dashboard">
               <span className="label">Dashboard</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="survey-list" icon={<VideoCameraOutlined />}>
-            <NavLink style={{ textDecoration: 'none' }} to="/survey-list">
+            <NavLink className="no-text-decoration" to="/survey-list">
               <span className="label">Survey List</span>
             </NavLink>
           </Menu.Item>
           <Menu.Item key="add-survey" icon={<UploadOutlined />}>
-            <NavLink style={{ textDecoration: 'none' }} to="/add-survey">
+            <NavLink className="no-text-decoration" to="/add-survey">
               <span className="label">Your Survey</span>
             </NavLink>
           </Menu.Item>

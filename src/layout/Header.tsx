@@ -46,28 +46,13 @@ const Header: React.FC<THeaderProps> = ({ collapsed, toggle }) => {
   )
 
   return (
-    <AntHeader
-      className="site-layout-background"
-      style={{
-        padding: 0,
-      }}
-    >
+    <AntHeader className="site-layout-background p-0">
       {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
         className: 'trigger',
         onClick: toggle,
       })}
       <Dropdown overlay={menu} placement="bottomCenter" arrow>
-        <Avatar
-          style={{
-            backgroundColor: '#87d068',
-            float: 'right',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '15px 40px ',
-          }}
-          icon={<UserOutlined />}
-        />
+        <Avatar className="header-avatar-list" icon={<UserOutlined />} />
       </Dropdown>
     </AntHeader>
   )

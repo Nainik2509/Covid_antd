@@ -157,7 +157,6 @@ img {
   color: #141414;
   box-shadow: 0 20px 27px rgb(0 0 0 / 5%);
   flex-direction: row;
-  padding: 0 50px;
   height: 64px;
   line-height: 64px;
 }
@@ -240,6 +239,7 @@ img {
 .layout-default .ant-layout-content {
   padding-top: 40px;
 }
+
 .font-regular {
   font-weight: 400;
 }

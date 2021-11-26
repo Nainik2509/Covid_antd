@@ -256,8 +256,8 @@ const CovidForm = () => {
     return { label: data, value: data }
   }
   return (
-    <Content style={{ padding: '15px' }}>
-      <Title level={3} style={{ textAlign: 'center', marginBottom: '50px' }}>
+    <Content className="p-15">
+      <Title level={3} className="covid-form-content-title">
         Health Care Survey-Corona Virus (COVID-19) Awareness Survey
       </Title>
       <Form onFinish={handleSubmit(onSubmit)} className="row-col">
@@ -474,19 +474,19 @@ const CovidForm = () => {
                   render={({ field }) => (
                     <Select
                       {...field}
+                      className="w-100"
                       allowClear
                       autoClearSearchValue
                       showArrow
                       mode="multiple"
                       placeholder="Please select all that apply"
-                      style={{ width: '100%' }}
                       options={
                         symptomsGroup && symptomsGroup.map(renderSymptomsOption)
                       }
                     />
 
-                    // <Checkbox.Group {...field} style={{ width: '100%' }}>
-                    //   <Row style={{ width: '100%' }}>
+                    // <Checkbox.Group {...field}  className="w-100">
+                    //   <Row className="w-100">
                     //     {symptomsGroup.map((data, i) => (
                     //       <Col key={i} xs={12} sm={12} md={6} lg={6} xl={6}>
                     //         <Checkbox value={data}>{data}</Checkbox>
@@ -500,15 +500,15 @@ const CovidForm = () => {
             </Col>
           </Row>
         )}
-        <Row gutter={[48, 0]} style={{ width: '100%' }}>
-          <Row style={{ width: '100%', padding: '10px 24px' }}>
+        <Row gutter={[48, 0]} className="w-100">
+          <Row className="w-100 covid-form-rate-title">
             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
               <Text mark>
                 {`Rate your country's Health Department in the following aspects:`}
               </Text>
             </Col>
           </Row>
-          <Row style={{ width: '100%', padding: '0px 24px' }}>
+          <Row className="w-100 covid-form-rate-title py-0">
             <Col xs={24} sm={24} md={8} lg={8} xl={8}>
               <Text keyboard>Health and hygiene awareness</Text>
             </Col>

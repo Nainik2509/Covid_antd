@@ -41,6 +41,9 @@
 .site-layout .site-layout-background {
   background: #fff;
 }
+.site-layout-background-padding {
+  padding: 24px;
+}
 
 .antd-example-spinner {
   height: 100vh;
@@ -62,4 +65,42 @@
 .table-responsive {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.ant-row .covid-form-rate-title {
+  padding: 10px 24px;
+}
+
+.p-15 {
+  padding: 15px;
+}
+.covid-form-content-title {
+  text-align: center;
+}
+.p-15 h3.ant-typography,
+.ant-typography h3 {
+  margin-bottom: 3rem;
+}
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.header-avatar-list {
+  background-color: #87d068;
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 40px;
+}
+
+.site-layout-background-footer {
+  background-color: #f2faff;
+  text-align: center;
+}
+
+.site-layout-content {
+  margin: 24px;
+  overflow: initial;
 }
