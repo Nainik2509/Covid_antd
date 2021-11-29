@@ -40,6 +40,10 @@ const CountryReducer = (
         ...state,
         covidObj: action.payload,
       }
+    case CovidSurveyActions.DELETE_USER_COVID_SURVEY:
+      return {
+        ...state,
+      }
     default:
       return state
   }

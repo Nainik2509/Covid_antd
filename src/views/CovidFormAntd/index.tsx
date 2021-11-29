@@ -209,6 +209,8 @@ const CovidForm = () => {
           search: `${getValues('countryId')}`,
         }))
       }
+    } else {
+      reset({ ...initialValues })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userCovidSurvey, reset])
@@ -226,6 +228,8 @@ const CovidForm = () => {
               header: 'Success',
               message: 'Your survey has been submitted.',
             })
+          } else {
+            setLoading(false)
           }
         })
       } else if (userCovidSurvey) {
@@ -239,6 +243,8 @@ const CovidForm = () => {
                 message: 'Your survey has been updated.',
               })
               dispatch(getCovidSurvey())
+            } else {
+              setLoading(false)
             }
           }
         )

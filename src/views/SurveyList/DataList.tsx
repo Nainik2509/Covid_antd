@@ -5,29 +5,31 @@ import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { ParsedFilter } from '../../helpers/common-types'
-import { getAllCovidSurvey } from '../../redux/actions/covidSurvey'
+import {
+  deleteCovidSurvey,
+  getAllCovidSurvey,
+} from '../../redux/actions/covidSurvey'
 import { covidObj } from '../../redux/actions/covidSurvey/covidSurvey-types'
 import { AppDispatch, RootState } from '../../redux/reducers/rootReducers'
 import {
   CANCELLED_DELETE_TEXT,
   CANCELLED_DELETE_TITLE,
+  DELETE_SUCCESS_TEXT,
   DELETE_TEXT,
   DELETE_TITLE,
   tagColor,
 } from '../../utils/utilities'
-import { DeleteTwoTone } from '@ant-design/icons'
+import { DeleteTwoTone, EyeTwoTone } from '@ant-design/icons'
+import DataDetailModel from './DataDetailModel'
 
 const MySwal = withReactContent(Swal)
 
-const DataList: React.FC = () => {
-  type TAction = {
-    record: covidObj
-    handleDelete: (
-      record: covidObj,
-      parsedFilter: ParsedFilter
-    ) => Promise<void>
-  }
+type TAction = {
+  record: covidObj
+  handleDelete: (record: covidObj) => Promise<void>
+}
 
+const DataList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch()
 
   const [parsedFilter, setParsedFilter] = useState<ParsedFilter>({
@@ -36,6 +38,8 @@ const DataList: React.FC = () => {
     search: '',
   })
   const [dataListLoading, setDataListLoading] = useState<boolean>(false)
+  const [dataDetailModel, setDataDetailModel] = useState<boolean>(false)
+  const [currentData, setCurrentData] = useState<covidObj | null>(null)
 
   const dataList: covidObj[] = useSelector(
     (state: RootState) => state.covidSurveyReducer.covidSurveyList
@@ -56,7 +60,7 @@ const DataList: React.FC = () => {
   }, [parsedFilter, dispatch])
 
   // On Delete Confirmation Alert
-  const handleDelete = (record: covidObj, parsedFilter: ParsedFilter) => {
+  const handleDelete = (record: covidObj) => {
     return MySwal.fire({
       title: DELETE_TITLE,
       text: DELETE_TEXT('user covid survey'),
@@ -64,24 +68,29 @@ const DataList: React.FC = () => {
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
     }).then(function (result) {
+      // Success Handler
       if (result.value) {
-        console.log(record, parsedFilter)
-        // dispatch(deleteData(parsedFilter, record.slug)).then((data) => {
-        //   if (data) {
-        //     MySwal.fire({
-        //       icon: 'success',
-        //       title: 'Deleted!',
-        //       text: 'Table deleted successfully..!',
-        //     })
-        //   } else {
-        //     MySwal.fire({
-        //       title: 'Cancelled',
-        //       text: 'Your Table is safe :)',
-        //       icon: 'error',
-        //     })
-        //   }
-        // })
+        dispatch(deleteCovidSurvey(record.id)).then((data) => {
+          if (data) {
+            MySwal.fire({
+              icon: 'success',
+              title: 'Deleted!',
+              text: DELETE_SUCCESS_TEXT('User covid survey'),
+            })
+            setDataListLoading(true)
+            dispatch(getAllCovidSurvey(parsedFilter)).then(() =>
+              setDataListLoading(false)
+            )
+          } else {
+            MySwal.fire({
+              title: 'Cancelled',
+              text: CANCELLED_DELETE_TEXT('User covid survey'),
+              icon: 'error',
+            })
+          }
+        })
       } else if (result.dismiss === MySwal.DismissReason.cancel) {
+        // Denied Handler
         MySwal.fire({
           title: CANCELLED_DELETE_TITLE,
           text: CANCELLED_DELETE_TEXT('user covid survey'),
@@ -91,14 +100,22 @@ const DataList: React.FC = () => {
     })
   }
 
+  // Action Components
   const ActionComponent: React.FC<TAction> = ({ record, handleDelete }) => {
-    console.log(record)
     return (
       <div>
+        <EyeTwoTone
+          className="button-datalist cursor-pointer"
+          twoToneColor="#1890ff"
+          onClick={() => {
+            setDataDetailModel(true)
+            setCurrentData(record)
+          }}
+        />
         <DeleteTwoTone
-          className="delete-button-datalist cursor-pointer"
+          className="button-datalist cursor-pointer"
           twoToneColor="#dc3545"
-          onClick={() => handleDelete(record, parsedFilter)}
+          onClick={() => handleDelete(record)}
         />
       </div>
     )
@@ -163,6 +180,11 @@ const DataList: React.FC = () => {
             setParsedFilter({ ...parsedFilter, perPage: size })
           },
         }}
+      />
+      <DataDetailModel
+        dataDetailModel={dataDetailModel}
+        setDataDetailModel={setDataDetailModel}
+        currentData={currentData}
       />
     </div>
   )

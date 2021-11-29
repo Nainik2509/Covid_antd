@@ -105,10 +105,58 @@
   overflow: initial;
 }
 
-.delete-button-datalist {
+.button-datalist {
+  margin: 3px;
   font-size: 16px;
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.ant-descriptions-item-container .ant-descriptions-item-label,
+.ant-descriptions-item-container .ant-descriptions-item-content {
+  display: block;
+  margin-right: 2px;
+}
+
+.ant-descriptions .ant-descriptions-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #141414;
+  margin-bottom: 14px;
+}
+
+.ant-descriptions .ant-descriptions-row > td,
+.ant-descriptions .ant-descriptions-row > th {
+  padding-bottom: 6px;
+}
+
+.ant-descriptions .ant-descriptions-item-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8c8c8c;
+}
+
+.ant-descriptions .ant-descriptions-item-content {
+  font-size: 13px;
+  font-weight: 600;
+  color: #141414;
+}
+
+.card-billing-info.ant-card .ant-descriptions-header {
+  margin-bottom: 0px;
+}
+
+.ant-descriptions .ant-descriptions-row > td,
+.ant-descriptions .ant-descriptions-row > th {
+  padding-bottom: 6px;
+}
+
+.badge-bg-success .ant-badge-count {
+  background: #87d068;
+}
+
+.badge-bg-error .ant-badge-count {
+  background: tomato;
 }

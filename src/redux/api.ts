@@ -52,6 +52,9 @@ API.interceptors.response.use(
     if (err?.response?.status === 404) {
       notifyError({ header: null, message: err?.response?.data?.message })
     }
+    if (err?.response?.status === 500) {
+      notifyError({ header: null, message: err?.response?.data?.message })
+    }
     if (err?.response?.status === 403) {
       notifyError({
         header: 'Forbidden',

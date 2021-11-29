@@ -5,6 +5,7 @@ export enum CovidSurveyActions {
   GET_USER_COVID_SURVEY = 'GET_USER_COVID_SURVEY',
   GET_ALL_PAGINATED_COVID_SURVEY = 'GET_ALL_PAGINATED_COVID_SURVEY',
   UPDATE_USER_COVID_SURVEY = 'UPDATE_USER_COVID_SURVEY',
+  DELETE_USER_COVID_SURVEY = 'DELETE_USER_COVID_SURVEY',
 }
 
 export type covidFormData = {
@@ -67,11 +68,16 @@ type updateCovidSurvey = {
   payload: covidObj
 }
 
+type deleteCovidSurvey = {
+  type: CovidSurveyActions.DELETE_USER_COVID_SURVEY
+}
+
 export type IAction =
   | DataListCovidSurvey
   | AddCovidSurvey
   | GetUserCovidSurvey
   | updateCovidSurvey
+  | deleteCovidSurvey
 
 export type InitialState = {
   covidObj: covidObj | null

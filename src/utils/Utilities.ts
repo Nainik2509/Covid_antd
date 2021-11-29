@@ -17,8 +17,11 @@ export const MIN_RATE = (name: string, type: number) =>
 export const DELETE_TITLE = 'Are you sure?'
 export const CANCELLED_DELETE_TITLE = 'Cancelled'
 export const DELETE_TEXT = (name: string) => `You want to delete ${name}!`
+export const DELETE_SUCCESS_TEXT = (name: string) =>
+  `${name} deleted successfully!`
 export const CANCELLED_DELETE_TEXT = (name: string) => `Your ${name} is safe :)`
 
+// Constant Array Masters
 export const BooleanType = [true, false]
 export const ageGroup = [
   '0 - 17',
@@ -27,15 +30,6 @@ export const ageGroup = [
   '59 - 70',
   '71 and above',
 ]
-
-export const tagColor: TTagColor = {
-  '0 - 17': 'cyan',
-  '18 - 35': 'green',
-  '36 - 58': 'purple',
-  '59 - 70': 'gold',
-  '71 and above': 'magenta',
-}
-
 export const symptomsGroup = [
   'Cold',
   'Cough',
@@ -49,3 +43,11 @@ export const symptomsGroup = [
   'Itching',
   'Diarrhea',
 ]
+
+export const tagColor: TTagColor = {
+  '0 - 17': 'cyan',
+  '18 - 35': 'green',
+  '36 - 58': 'purple',
+  '59 - 70': 'gold',
+  '71 and above': 'magenta',
+}

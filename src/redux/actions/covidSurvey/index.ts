@@ -84,3 +84,19 @@ export const updateCovidSurvey = (id: paramId, data: covidFormData) => {
     )
   }
 }
+
+// ** API for add Covid Survey
+export const deleteCovidSurvey = (id: paramId) => {
+  return async (dispatch: Dispatch<IAction>) => {
+    return API.delete(`${COVIDSURVEY_GENERIC_API}/${id}`).then((response) => {
+      if (response && response.status === 200) {
+        dispatch({
+          type: CovidSurveyActions.DELETE_USER_COVID_SURVEY,
+        })
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+}
