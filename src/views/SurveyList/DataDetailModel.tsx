@@ -1,5 +1,5 @@
-import { Badge, Descriptions, Modal, Tag } from 'antd'
 import moment from 'moment'
+import { Badge, Descriptions, Modal, Rate, Tag } from 'antd'
 import { covidObj } from '../../redux/actions/covidSurvey/covidSurvey-types'
 import { tagColor } from '../../utils/utilities'
 
@@ -14,7 +14,6 @@ const DataDetailModel: React.FC<TDataDetails> = ({
   setDataDetailModel,
   currentData,
 }) => {
-  console.log(currentData)
   return (
     <Modal
       title="Covid Survey Details"
@@ -62,7 +61,28 @@ const DataDetailModel: React.FC<TDataDetails> = ({
           )}
         </Descriptions.Item>
         <Descriptions.Item label="Health and hygiene awareness" span={1}>
-          {currentData?.first_name}
+          <Rate allowHalf disabled defaultValue={currentData?.awareness} />
+        </Descriptions.Item>
+        <Descriptions.Item label="Travel limitations" span={1}>
+          <Rate allowHalf disabled defaultValue={currentData?.limitations} />
+        </Descriptions.Item>
+        <Descriptions.Item
+          label="Screening and tests to detect the virus"
+          span={1}
+        >
+          <Rate allowHalf disabled defaultValue={currentData?.detect} />
+        </Descriptions.Item>
+        <Descriptions.Item label="Availability of hospitals" span={1}>
+          <Rate allowHalf disabled defaultValue={currentData?.hospitals} />
+        </Descriptions.Item>
+        <Descriptions.Item
+          label="Availability of healthcare professionals"
+          span={1}
+        >
+          <Rate allowHalf disabled defaultValue={currentData?.healthcare} />
+        </Descriptions.Item>
+        <Descriptions.Item label="Quality of treatment" span={1}>
+          <Rate allowHalf disabled defaultValue={currentData?.treatment} />
         </Descriptions.Item>
       </Descriptions>
     </Modal>
