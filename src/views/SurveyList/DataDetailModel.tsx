@@ -61,6 +61,9 @@ const DataDetailModel: React.FC<TDataDetails> = ({
             </div>
           )}
         </Descriptions.Item>
+        <Descriptions.Item label="Health and hygiene awareness" span={1}>
+          {currentData?.first_name}
+        </Descriptions.Item>
       </Descriptions>
     </Modal>
   )
