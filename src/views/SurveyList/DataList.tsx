@@ -1,11 +1,16 @@
-import { Table, Tag } from 'antd'
+import { Col, Dropdown, Row, Table, Tag, Menu, Button } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { DeleteTwoTone, EyeTwoTone, EditTwoTone } from '@ant-design/icons'
+import {
+  DeleteTwoTone,
+  EyeTwoTone,
+  EditTwoTone,
+  DownOutlined,
+} from '@ant-design/icons'
 import { ParsedFilter } from '../../helpers/common-types'
 import {
   deleteCovidSurvey,
@@ -162,6 +167,39 @@ const DataList: React.FC = () => {
     },
   ]
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onClick = ({ key }: any): void => {
+    if (key) setParsedFilter({ ...parsedFilter, perPage: key })
+  }
+  const menu = (
+    <Menu onClick={onClick}>
+      <Menu.Item key="10">10</Menu.Item>
+      <Menu.Item key="15">15</Menu.Item>
+      <Menu.Item key="20">20</Menu.Item>
+      <Menu.Item key="50">50</Menu.Item>
+    </Menu>
+  )
+
+  type TCustomHeader = { rowsPerPage: number; total: number }
+
+  const CustomHeader: React.FC<TCustomHeader> = (props) => (
+    <Row>
+      <Col span={8} offset={16}>
+        <Dropdown overlay={menu}>
+          <Button
+            className="ant-dropdown-link"
+            onClick={(e) => e.preventDefault()}
+          >
+            <span className="align-middle mx-50">
+              {`${props.rowsPerPage} of ${props.total}`}
+            </span>
+            <DownOutlined />
+          </Button>
+        </Dropdown>
+      </Col>
+    </Row>
+  )
+
   return (
     <div className="table-responsive">
       <Table<covidObj>
@@ -170,6 +208,9 @@ const DataList: React.FC = () => {
         rowKey="id"
         loading={dataListLoading}
         size="middle"
+        title={() => (
+          <CustomHeader rowsPerPage={parsedFilter.perPage} total={dataCount} />
+        )}
         pagination={{
           position: ['bottomCenter'],
           total: dataCount,
@@ -182,7 +223,7 @@ const DataList: React.FC = () => {
           pageSize: parsedFilter.perPage,
           pageSizeOptions: ['10', '15', '20', '50'],
           responsive: true,
-          showSizeChanger: true,
+          showSizeChanger: false,
           onShowSizeChange: (current: number, size: number) => {
             setParsedFilter({ ...parsedFilter, perPage: size })
           },
