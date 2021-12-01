@@ -2,8 +2,10 @@ import { Table, Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { DeleteTwoTone, EyeTwoTone, EditTwoTone } from '@ant-design/icons'
 import { ParsedFilter } from '../../helpers/common-types'
 import {
   deleteCovidSurvey,
@@ -19,7 +21,6 @@ import {
   DELETE_TITLE,
   tagColor,
 } from '../../utils/utilities'
-import { DeleteTwoTone, EyeTwoTone } from '@ant-design/icons'
 import DataDetailModel from './DataDetailModel'
 
 const MySwal = withReactContent(Swal)
@@ -31,6 +32,7 @@ type TAction = {
 
 const DataList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch()
+  const history = useHistory()
 
   const [parsedFilter, setParsedFilter] = useState<ParsedFilter>({
     page: 1,
@@ -104,6 +106,11 @@ const DataList: React.FC = () => {
   const ActionComponent: React.FC<TAction> = ({ record, handleDelete }) => {
     return (
       <div>
+        <EditTwoTone
+          className="button-datalist cursor-pointer"
+          twoToneColor="#ff6205"
+          onClick={() => history.push(`/edit-survey/${record.id}`)}
+        />
         <EyeTwoTone
           className="button-datalist cursor-pointer"
           twoToneColor="#1890ff"

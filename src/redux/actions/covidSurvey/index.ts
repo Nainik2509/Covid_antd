@@ -86,6 +86,23 @@ export const updateCovidSurvey = (id: paramId, data: covidFormData) => {
 }
 
 // ** API for add Covid Survey
+export const getCovidSurveyById = (id: paramId) => {
+  return async (dispatch: Dispatch<IAction>) => {
+    return API.get(`${COVIDSURVEY_GENERIC_API}/${id}`).then((response) => {
+      if (response && response.status === 200) {
+        dispatch({
+          type: CovidSurveyActions.GET_COVID_SURVEY_BY_ID,
+          payload: response.data.data,
+        })
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+}
+
+// ** API for add Covid Survey
 export const deleteCovidSurvey = (id: paramId) => {
   return async (dispatch: Dispatch<IAction>) => {
     return API.delete(`${COVIDSURVEY_GENERIC_API}/${id}`).then((response) => {

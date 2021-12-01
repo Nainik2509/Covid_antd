@@ -36,6 +36,7 @@ const CountryReducer = (
         covidObj: action.payload,
       }
     case CovidSurveyActions.UPDATE_USER_COVID_SURVEY:
+    case CovidSurveyActions.GET_COVID_SURVEY_BY_ID:
       return {
         ...state,
         covidObj: action.payload,

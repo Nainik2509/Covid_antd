@@ -6,6 +6,7 @@ export enum CovidSurveyActions {
   GET_ALL_PAGINATED_COVID_SURVEY = 'GET_ALL_PAGINATED_COVID_SURVEY',
   UPDATE_USER_COVID_SURVEY = 'UPDATE_USER_COVID_SURVEY',
   DELETE_USER_COVID_SURVEY = 'DELETE_USER_COVID_SURVEY',
+  GET_COVID_SURVEY_BY_ID = 'GET_COVID_SURVEY_BY_ID',
 }
 
 export type covidFormData = {
@@ -64,7 +65,9 @@ type GetUserCovidSurvey = {
 }
 
 type updateCovidSurvey = {
-  type: CovidSurveyActions.UPDATE_USER_COVID_SURVEY
+  type:
+    | CovidSurveyActions.UPDATE_USER_COVID_SURVEY
+    | CovidSurveyActions.GET_COVID_SURVEY_BY_ID
   payload: covidObj
 }
 
