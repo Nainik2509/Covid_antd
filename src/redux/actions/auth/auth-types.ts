@@ -5,15 +5,15 @@ export enum AuthActions {
 
 export type loginObj = {
   id: number
-  name: string
-  iso: string
-  nicename: string
-  iso3: string
-  numcode: number
-  phonecode: number
-  isDeleted: boolean
+  first_name: string
+  last_name: string
+  email: string
+  role: string
+  status: string
   createdAt: string
   updatedAt: string
+  userId: null
+  token: string
 }
 
 type AuthLogin = {

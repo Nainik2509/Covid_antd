@@ -86,7 +86,6 @@ const InfectedPieChart = () => {
     setInfectedArr([temp])
   }, [infectedStats])
 
-  console.log('infectedArr', infectedArr)
   return (
     <div id="chart">
       <Card title="Infected Overview">

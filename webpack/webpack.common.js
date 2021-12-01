@@ -33,8 +33,9 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, '..', './build'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, '..', './dist'),
+    publicPath: '/',
+    filename: './bundle.js',
   },
   devServer: {
     historyApiFallback: true,
