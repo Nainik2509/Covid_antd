@@ -1,9 +1,12 @@
+import { Card } from 'antd'
 import DataList from './DataList'
 
 const SurveyList: React.FC = () => {
   return (
     <div>
-      <DataList />
+      <Card>
+        <DataList />
+      </Card>
     </div>
   )
 }

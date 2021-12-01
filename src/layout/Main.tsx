@@ -28,7 +28,7 @@ const Main: React.FC<TMainProps> = ({ children }) => {
     <React.Fragment>
       <Layout>
         <SideBar collapsed={collapsed} toggle={toggle} />
-        <Layout className="site-layout">
+        <Layout>
           <Header collapsed={collapsed} toggle={toggle} />
           <React.Suspense fallback={<FallBackSpinner />}>
             <ContentSection>{children}</ContentSection>

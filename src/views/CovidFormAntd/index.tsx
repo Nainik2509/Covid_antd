@@ -19,6 +19,7 @@ import {
   Typography,
   Rate,
   Select,
+  Card,
 } from 'antd'
 
 const { Title, Text } = Typography
@@ -262,385 +263,388 @@ const CovidForm = () => {
     return { label: data, value: data }
   }
   return (
-    <Content className="p-15">
-      <Title level={3} className="covid-form-content-title">
-        Health Care Survey-Corona Virus (COVID-19) Awareness Survey
-      </Title>
-      <Form onFinish={handleSubmit(onSubmit)} className="row-col">
-        <Row gutter={[48, 0]}>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Form.Item
-              className="username"
-              label="Enter your first name"
-              name="first_name"
-              hasFeedback={errors && errors['first_name'] ? true : false}
-              validateStatus={
-                errors && errors['first_name'] ? 'error' : 'success'
-              }
-              help={errors.first_name?.message}
-            >
-              <Controller
-                control={control}
-                name="first_name"
-                render={({ field }) => (
-                  <Input {...field} placeholder="Enter your first name" />
-                )}
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Form.Item
-              className="username"
-              label="Enter your last name"
-              name="last_name"
-              hasFeedback={errors && errors['last_name'] ? true : false}
-              validateStatus={
-                errors && errors['last_name'] ? 'error' : 'success'
-              }
-              help={errors.last_name?.message}
-            >
-              <Controller
-                control={control}
-                name="last_name"
-                render={({ field }) => (
-                  <Input {...field} placeholder="Enter your last name" />
-                )}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[48, 0]}>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Form.Item
-              className="username"
-              label="Approximately when did you first hear about the COVID-19 outbreak?"
-              colon={false}
-              name="out_break"
-              hasFeedback={errors && errors['out_break'] ? true : false}
-              validateStatus={
-                errors && errors['out_break'] ? 'error' : 'success'
-              }
-              help={errors.out_break?.message}
-            >
-              <Controller
-                control={control}
-                name="out_break"
-                render={({ field }) => (
-                  <DatePicker
-                    {...field}
-                    value={field.value ? moment(field.value) : null}
-                    placeholder="Choose a date"
-                    format={(value) => `${value.format('MMMM Do YYYY')}`}
-                    onChange={(date) => {
-                      if (date) {
-                        const dateToUpdate = moment(date).format('YYYY-MM-DD')
-                        field.onChange(dateToUpdate)
-                      } else {
-                        field.onChange(null)
-                      }
-                    }}
-                  />
-                )}
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Form.Item
-              className="username"
-              label="Country of origin"
-              name="countryId"
-              hasFeedback={errors && errors['countryId'] ? true : false}
-              validateStatus={
-                errors && errors['countryId'] ? 'error' : 'success'
-              }
-              help={errors.countryId?.message}
-            >
-              <Controller
-                control={control}
-                name="countryId"
-                render={({ field }) => (
-                  <AutoComplete
-                    {...field}
-                    showSearch
-                    options={
-                      countryList && countryList.map(renderCountryOption)
-                    }
-                    value={
-                      field.value && countryList
-                        ? countryList
-                            .map(renderCountryOption)
-                            .find((id) => id.value === field.value)?.label
-                        : undefined
-                    }
-                    onSearch={(type) => {
-                      if (type) {
-                        setParsedFilter({ ...parsedFilter, search: type })
-                      } else {
-                        // setParsedFilter({ ...parsedFilter, search: '' })
-                        const temp = countryList
-                          .map(renderCountryOption)
-                          .find((id) => id.value === getValues('countryId'))
-                        if (!temp || temp === undefined) {
-                          setParsedFilter((parsedFilter) => ({
-                            ...parsedFilter,
-                            search: `${getValues('countryId')}`,
-                          }))
-                        }
-                      }
-                    }}
-                    onSelect={(selected) => {
-                      if (selected) {
-                        field.onChange(selected)
-                      } else {
-                        field.onChange(null)
-                      }
-                    }}
-                    defaultActiveFirstOption={false}
-                  ></AutoComplete>
-                )}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[48, 0]}>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Form.Item
-              className="username"
-              label="Which age group do you fall under?"
-              colon={false}
-              name="age_group"
-              validateStatus={
-                errors && errors['age_group'] ? 'error' : 'success'
-              }
-              help={errors.age_group?.message}
-            >
-              <Controller
-                control={control}
-                name="age_group"
-                render={({ field }) => (
-                  <Radio.Group {...field}>
-                    <Space direction="vertical">
-                      {ageGroup.map((data, i) => (
-                        <Radio key={i} value={data}>
-                          {data}
-                        </Radio>
-                      ))}
-                    </Space>
-                  </Radio.Group>
-                )}
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Form.Item
-              className="username"
-              label="Are your covid infectious?"
-              colon={false}
-              name="infected"
-              validateStatus={
-                errors && errors['infected'] ? 'error' : 'success'
-              }
-              help={errors.infected?.message}
-            >
-              <Controller
-                control={control}
-                name="infected"
-                render={({ field }) => (
-                  <Radio.Group {...field}>
-                    <Space>
-                      {BooleanType.map((data, i) => (
-                        <Radio key={i} value={data}>
-                          {data ? 'Yes' : 'No'}
-                        </Radio>
-                      ))}
-                    </Space>
-                  </Radio.Group>
-                )}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        {watchInfected && (
+    <Card>
+      <Content className="p-15">
+        <Title level={3} className="covid-form-content-title">
+          Health Care Survey-Corona Virus (COVID-19) Awareness Survey
+        </Title>
+        <Form onFinish={handleSubmit(onSubmit)} className="row-col">
           <Row gutter={[48, 0]}>
-            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
               <Form.Item
                 className="username"
-                label="What are the main symptoms of the virus? (Select all that apply)"
-                colon={false}
-                name="symptoms"
+                label="Enter your first name"
+                name="first_name"
+                hasFeedback={errors && errors['first_name'] ? true : false}
                 validateStatus={
-                  errors && errors['symptoms'] ? 'error' : 'success'
+                  errors && errors['first_name'] ? 'error' : 'success'
                 }
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                help={errors.symptoms && (errors.symptoms as any).message}
+                help={errors.first_name?.message}
               >
                 <Controller
                   control={control}
-                  name="symptoms"
+                  name="first_name"
                   render={({ field }) => (
-                    <Select
-                      {...field}
-                      className="w-100"
-                      allowClear
-                      autoClearSearchValue
-                      showArrow
-                      mode="multiple"
-                      placeholder="Please select all that apply"
-                      options={
-                        symptomsGroup && symptomsGroup.map(renderSymptomsOption)
-                      }
-                    />
-
-                    // <Checkbox.Group {...field}  className="w-100">
-                    //   <Row className="w-100">
-                    //     {symptomsGroup.map((data, i) => (
-                    //       <Col key={i} xs={12} sm={12} md={6} lg={6} xl={6}>
-                    //         <Checkbox value={data}>{data}</Checkbox>
-                    //       </Col>
-                    //     ))}
-                    //   </Row>
-                    // </Checkbox.Group>
+                    <Input {...field} placeholder="Enter your first name" />
+                  )}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+              <Form.Item
+                className="username"
+                label="Enter your last name"
+                name="last_name"
+                hasFeedback={errors && errors['last_name'] ? true : false}
+                validateStatus={
+                  errors && errors['last_name'] ? 'error' : 'success'
+                }
+                help={errors.last_name?.message}
+              >
+                <Controller
+                  control={control}
+                  name="last_name"
+                  render={({ field }) => (
+                    <Input {...field} placeholder="Enter your last name" />
                   )}
                 />
               </Form.Item>
             </Col>
           </Row>
-        )}
-        <Row gutter={[48, 0]} className="w-100">
-          <Row className="w-100 covid-form-rate-title">
+          <Row gutter={[48, 0]}>
             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-              <Text mark>
-                {`Rate your country's Health Department in the following aspects:`}
-              </Text>
-            </Col>
-          </Row>
-          <Row className="w-100 covid-form-rate-title py-0">
-            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Text keyboard>Health and hygiene awareness</Text>
-            </Col>
-            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
               <Form.Item
-                name="awareness"
+                className="username"
+                label="Approximately when did you first hear about the COVID-19 outbreak?"
+                colon={false}
+                name="out_break"
+                hasFeedback={errors && errors['out_break'] ? true : false}
                 validateStatus={
-                  errors && errors['awareness'] ? 'error' : 'success'
+                  errors && errors['out_break'] ? 'error' : 'success'
                 }
-                help={errors.awareness?.message}
+                help={errors.out_break?.message}
               >
                 <Controller
                   control={control}
+                  name="out_break"
+                  render={({ field }) => (
+                    <DatePicker
+                      {...field}
+                      value={field.value ? moment(field.value) : null}
+                      placeholder="Choose a date"
+                      format={(value) => `${value.format('MMMM Do YYYY')}`}
+                      onChange={(date) => {
+                        if (date) {
+                          const dateToUpdate = moment(date).format('YYYY-MM-DD')
+                          field.onChange(dateToUpdate)
+                        } else {
+                          field.onChange(null)
+                        }
+                      }}
+                    />
+                  )}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+              <Form.Item
+                className="username"
+                label="Country of origin"
+                name="countryId"
+                hasFeedback={errors && errors['countryId'] ? true : false}
+                validateStatus={
+                  errors && errors['countryId'] ? 'error' : 'success'
+                }
+                help={errors.countryId?.message}
+              >
+                <Controller
+                  control={control}
+                  name="countryId"
+                  render={({ field }) => (
+                    <AutoComplete
+                      {...field}
+                      showSearch
+                      options={
+                        countryList && countryList.map(renderCountryOption)
+                      }
+                      value={
+                        field.value && countryList
+                          ? countryList
+                              .map(renderCountryOption)
+                              .find((id) => id.value === field.value)?.label
+                          : undefined
+                      }
+                      onSearch={(type) => {
+                        if (type) {
+                          setParsedFilter({ ...parsedFilter, search: type })
+                        } else {
+                          // setParsedFilter({ ...parsedFilter, search: '' })
+                          const temp = countryList
+                            .map(renderCountryOption)
+                            .find((id) => id.value === getValues('countryId'))
+                          if (!temp || temp === undefined) {
+                            setParsedFilter((parsedFilter) => ({
+                              ...parsedFilter,
+                              search: `${getValues('countryId')}`,
+                            }))
+                          }
+                        }
+                      }}
+                      onSelect={(selected) => {
+                        if (selected) {
+                          field.onChange(selected)
+                        } else {
+                          field.onChange(null)
+                        }
+                      }}
+                      defaultActiveFirstOption={false}
+                    ></AutoComplete>
+                  )}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[48, 0]}>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+              <Form.Item
+                className="username"
+                label="Which age group do you fall under?"
+                colon={false}
+                name="age_group"
+                validateStatus={
+                  errors && errors['age_group'] ? 'error' : 'success'
+                }
+                help={errors.age_group?.message}
+              >
+                <Controller
+                  control={control}
+                  name="age_group"
+                  render={({ field }) => (
+                    <Radio.Group {...field}>
+                      <Space direction="vertical">
+                        {ageGroup.map((data, i) => (
+                          <Radio key={i} value={data}>
+                            {data}
+                          </Radio>
+                        ))}
+                      </Space>
+                    </Radio.Group>
+                  )}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+              <Form.Item
+                className="username"
+                label="Are your covid infectious?"
+                colon={false}
+                name="infected"
+                validateStatus={
+                  errors && errors['infected'] ? 'error' : 'success'
+                }
+                help={errors.infected?.message}
+              >
+                <Controller
+                  control={control}
+                  name="infected"
+                  render={({ field }) => (
+                    <Radio.Group {...field}>
+                      <Space>
+                        {BooleanType.map((data, i) => (
+                          <Radio key={i} value={data}>
+                            {data ? 'Yes' : 'No'}
+                          </Radio>
+                        ))}
+                      </Space>
+                    </Radio.Group>
+                  )}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          {watchInfected && (
+            <Row gutter={[48, 0]}>
+              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                <Form.Item
+                  className="username"
+                  label="What are the main symptoms of the virus? (Select all that apply)"
+                  colon={false}
+                  name="symptoms"
+                  validateStatus={
+                    errors && errors['symptoms'] ? 'error' : 'success'
+                  }
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  help={errors.symptoms && (errors.symptoms as any).message}
+                >
+                  <Controller
+                    control={control}
+                    name="symptoms"
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        className="w-100"
+                        allowClear
+                        autoClearSearchValue
+                        showArrow
+                        mode="multiple"
+                        placeholder="Please select all that apply"
+                        options={
+                          symptomsGroup &&
+                          symptomsGroup.map(renderSymptomsOption)
+                        }
+                      />
+
+                      // <Checkbox.Group {...field}  className="w-100">
+                      //   <Row className="w-100">
+                      //     {symptomsGroup.map((data, i) => (
+                      //       <Col key={i} xs={12} sm={12} md={6} lg={6} xl={6}>
+                      //         <Checkbox value={data}>{data}</Checkbox>
+                      //       </Col>
+                      //     ))}
+                      //   </Row>
+                      // </Checkbox.Group>
+                    )}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          )}
+          <Row gutter={[48, 0]} className="w-100">
+            <Row className="w-100 covid-form-rate-title">
+              <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                <Text mark>
+                  {`Rate your country's Health Department in the following aspects:`}
+                </Text>
+              </Col>
+            </Row>
+            <Row className="w-100 covid-form-rate-title py-0">
+              <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                <Text keyboard>Health and hygiene awareness</Text>
+              </Col>
+              <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+                <Form.Item
                   name="awareness"
-                  render={({ field }) => <Rate allowHalf {...field} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Text keyboard>Travel limitations</Text>
-            </Col>
-            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
-              <Form.Item
-                name="limitations"
-                validateStatus={
-                  errors && errors['limitations'] ? 'error' : 'success'
-                }
-                help={errors.limitations?.message}
-              >
-                <Controller
-                  control={control}
+                  validateStatus={
+                    errors && errors['awareness'] ? 'error' : 'success'
+                  }
+                  help={errors.awareness?.message}
+                >
+                  <Controller
+                    control={control}
+                    name="awareness"
+                    render={({ field }) => <Rate allowHalf {...field} />}
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                <Text keyboard>Travel limitations</Text>
+              </Col>
+              <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+                <Form.Item
                   name="limitations"
-                  render={({ field }) => <Rate allowHalf {...field} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Text keyboard>Screening and tests to detect the virus</Text>
-            </Col>
-            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
-              <Form.Item
-                name="detect"
-                validateStatus={
-                  errors && errors['detect'] ? 'error' : 'success'
-                }
-                help={errors.detect?.message}
-              >
-                <Controller
-                  control={control}
+                  validateStatus={
+                    errors && errors['limitations'] ? 'error' : 'success'
+                  }
+                  help={errors.limitations?.message}
+                >
+                  <Controller
+                    control={control}
+                    name="limitations"
+                    render={({ field }) => <Rate allowHalf {...field} />}
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                <Text keyboard>Screening and tests to detect the virus</Text>
+              </Col>
+              <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+                <Form.Item
                   name="detect"
-                  render={({ field }) => <Rate allowHalf {...field} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Text keyboard>Availability of hospitals</Text>
-            </Col>
-            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
-              <Form.Item
-                name="hospitals"
-                validateStatus={
-                  errors && errors['hospitals'] ? 'error' : 'success'
-                }
-                help={errors.hospitals?.message}
-              >
-                <Controller
-                  control={control}
+                  validateStatus={
+                    errors && errors['detect'] ? 'error' : 'success'
+                  }
+                  help={errors.detect?.message}
+                >
+                  <Controller
+                    control={control}
+                    name="detect"
+                    render={({ field }) => <Rate allowHalf {...field} />}
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                <Text keyboard>Availability of hospitals</Text>
+              </Col>
+              <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+                <Form.Item
                   name="hospitals"
-                  render={({ field }) => <Rate allowHalf {...field} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Text keyboard>Availability of healthcare professionals</Text>
-            </Col>
-            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
-              <Form.Item
-                name="healthcare"
-                validateStatus={
-                  errors && errors['healthcare'] ? 'error' : 'success'
-                }
-                help={errors.healthcare?.message}
-              >
-                <Controller
-                  control={control}
+                  validateStatus={
+                    errors && errors['hospitals'] ? 'error' : 'success'
+                  }
+                  help={errors.hospitals?.message}
+                >
+                  <Controller
+                    control={control}
+                    name="hospitals"
+                    render={({ field }) => <Rate allowHalf {...field} />}
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                <Text keyboard>Availability of healthcare professionals</Text>
+              </Col>
+              <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+                <Form.Item
                   name="healthcare"
-                  render={({ field }) => <Rate allowHalf {...field} />}
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Text keyboard>Quality of treatment</Text>
-            </Col>
-            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
-              <Form.Item
-                name="treatment"
-                validateStatus={
-                  errors && errors['treatment'] ? 'error' : 'success'
-                }
-                help={errors.treatment?.message}
-              >
-                <Controller
-                  control={control}
+                  validateStatus={
+                    errors && errors['healthcare'] ? 'error' : 'success'
+                  }
+                  help={errors.healthcare?.message}
+                >
+                  <Controller
+                    control={control}
+                    name="healthcare"
+                    render={({ field }) => <Rate allowHalf {...field} />}
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                <Text keyboard>Quality of treatment</Text>
+              </Col>
+              <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+                <Form.Item
                   name="treatment"
-                  render={({ field }) => <Rate allowHalf {...field} />}
-                />
-              </Form.Item>
+                  validateStatus={
+                    errors && errors['treatment'] ? 'error' : 'success'
+                  }
+                  help={errors.treatment?.message}
+                >
+                  <Controller
+                    control={control}
+                    name="treatment"
+                    render={({ field }) => <Rate allowHalf {...field} />}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Row>
+          <Row>
+            <Col span={6} offset={18} className="d-flex justify-content-end">
+              <Button
+                type="primary"
+                loading={loading}
+                disabled={loading}
+                shape="round"
+                htmlType="submit"
+                ghost
+              >
+                {addNew ? 'Submit' : 'Update'}
+              </Button>
             </Col>
           </Row>
-        </Row>
-        <Row>
-          <Col span={6} offset={18} className="d-flex justify-content-end">
-            <Button
-              type="primary"
-              loading={loading}
-              disabled={loading}
-              shape="round"
-              htmlType="submit"
-              ghost
-            >
-              {addNew ? 'Submit' : 'Update'}
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </Content>
+        </Form>
+      </Content>
+    </Card>
   )
 }
 

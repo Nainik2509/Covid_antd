@@ -42,7 +42,7 @@
   background: #fff;
 }
 .site-layout-background-padding {
-  padding: 24px;
+  /* padding: 24px; */
 }
 
 .antd-example-spinner {
@@ -159,4 +159,22 @@
 
 .badge-bg-error .ant-badge-count {
   background: tomato;
+}
+
+.ant-card-bordered {
+  border-radius: 0.428rem;
+}
+
+.text-center {
+  text-align: center !important;
+}
+.border-top {
+  border-top: 1px solid #ebe9f1 !important;
+}
+
+.border-right {
+  border-right: 1px solid #ebe9f1 !important;
+}
+.ant-card-body {
+  padding: 0px;
 }
