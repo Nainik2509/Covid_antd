@@ -53,6 +53,7 @@ const DataList: React.FC = () => {
     (state: RootState) => state.covidSurveyReducer.covidSurveyList
   )
 
+  const authUser = useSelector((state: RootState) => state.authReducer.userData)
   //   const totalPages = useSelector(
   //     (state: RootState) => state.covidSurveyReducer.totalPages
   //   )
@@ -112,11 +113,13 @@ const DataList: React.FC = () => {
   const ActionComponent: React.FC<TAction> = ({ record, handleDelete }) => {
     return (
       <div>
-        <EditTwoTone
-          className="button-datalist cursor-pointer"
-          twoToneColor="#ff6205"
-          onClick={() => history.push(`/edit-survey/${record.id}`)}
-        />
+        {authUser && authUser.role === 'Admin' && (
+          <EditTwoTone
+            className="button-datalist cursor-pointer"
+            twoToneColor="#ff6205"
+            onClick={() => history.push(`/edit-survey/${record.id}`)}
+          />
+        )}
         <EyeTwoTone
           className="button-datalist cursor-pointer"
           twoToneColor="#1890ff"
@@ -125,11 +128,13 @@ const DataList: React.FC = () => {
             setCurrentData(record)
           }}
         />
-        <DeleteTwoTone
-          className="button-datalist cursor-pointer"
-          twoToneColor="#dc3545"
-          onClick={() => handleDelete(record)}
-        />
+        {authUser && authUser.role === 'Admin' && (
+          <DeleteTwoTone
+            className="button-datalist cursor-pointer"
+            twoToneColor="#dc3545"
+            onClick={() => handleDelete(record)}
+          />
+        )}
       </div>
     )
   }
