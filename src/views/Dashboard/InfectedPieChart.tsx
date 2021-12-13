@@ -83,7 +83,7 @@ const InfectedPieChart = () => {
         (infectedStats.infectedCount + infectedStats.notInfectedCount)) *
       100
     ).toFixed(2)
-    setInfectedArr([temp])
+    if (temp) setInfectedArr([temp])
   }, [infectedStats])
 
   return (

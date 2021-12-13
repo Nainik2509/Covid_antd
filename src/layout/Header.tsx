@@ -5,9 +5,9 @@ import {
   MenuFoldOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { handleLogOut } from '../redux/actions/auth'
-import { AppDispatch } from '../redux/reducers/rootReducers'
+import { AppDispatch, RootState } from '../redux/reducers/rootReducers'
 import { notifySuccess } from '../utils/toaster'
 
 const { Header: AntHeader } = Layout
@@ -19,6 +19,9 @@ type THeaderProps = {
 
 const Header: React.FC<THeaderProps> = ({ collapsed, toggle }) => {
   const dispatch: AppDispatch = useDispatch()
+
+  const authUser = useSelector((state: RootState) => state.authReducer.userData)
+  console.log(authUser)
 
   const handleLogOutClick = () => {
     dispatch(handleLogOut()).then((data) => {
@@ -46,7 +49,7 @@ const Header: React.FC<THeaderProps> = ({ collapsed, toggle }) => {
   )
 
   return (
-    <AntHeader className="site-layout-background p-0">
+    <AntHeader className="site-layout-background">
       {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
         className: 'trigger',
         onClick: toggle,
@@ -54,6 +57,9 @@ const Header: React.FC<THeaderProps> = ({ collapsed, toggle }) => {
       <Dropdown overlay={menu} placement="bottomCenter" arrow>
         <Avatar className="header-avatar-list" icon={<UserOutlined />} />
       </Dropdown>
+      <div className="user-details-horizontal">
+        <div>{authUser && authUser.email}</div>
+      </div>
     </AntHeader>
   )
 }

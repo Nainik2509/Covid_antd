@@ -16,6 +16,11 @@ const adminRoutes = [
     exact: true,
     component: React.lazy(() => import('../views/SurveyList')),
   },
+  {
+    path: '/add-survey',
+    exact: true,
+    component: React.lazy(() => import('../views/CovidFormAntd')),
+  },
 ]
 
 export default adminRoutes

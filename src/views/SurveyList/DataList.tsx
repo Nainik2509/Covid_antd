@@ -1,4 +1,4 @@
-import { Col, Dropdown, Row, Table, Tag, Menu, Button } from 'antd'
+import { Col, Dropdown, Row, Table, Tag, Menu, Button, Input } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +10,7 @@ import {
   EyeTwoTone,
   EditTwoTone,
   DownOutlined,
+  SearchOutlined,
 } from '@ant-design/icons'
 import { ParsedFilter } from '../../helpers/common-types'
 import {
@@ -180,22 +181,50 @@ const DataList: React.FC = () => {
     </Menu>
   )
 
-  type TCustomHeader = { rowsPerPage: number; total: number }
+  type TCustomHeader = {
+    rowsPerPage: number
+    total: number
+    search: string
+    setParsedFilter: React.Dispatch<React.SetStateAction<ParsedFilter>>
+  }
 
   const CustomHeader: React.FC<TCustomHeader> = (props) => (
-    <Row>
-      <Col span={8} offset={16}>
-        <Dropdown overlay={menu}>
-          <Button
-            className="ant-dropdown-link"
-            onClick={(e) => e.preventDefault()}
-          >
-            <span className="align-middle mx-50">
-              {`${props.rowsPerPage} of ${props.total}`}
-            </span>
-            <DownOutlined />
-          </Button>
-        </Dropdown>
+    <Row justify="end" align="middle">
+      <Col flex={2}>
+        <Row justify="end" align="middle">
+          <Row justify="end" align="middle" gutter={[15, 0]}>
+            <Col flex="auto">
+              <Dropdown overlay={menu}>
+                <Button
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <span className="align-middle mx-50">
+                    {`${props.rowsPerPage} of ${props.total}`}
+                  </span>
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
+            </Col>
+            <Col flex="auto">
+              <Input
+                value={props.search}
+                size="small"
+                prefix={<SearchOutlined />}
+                autoFocus
+                onChange={(e) => {
+                  if (e) {
+                    setParsedFilter({ ...parsedFilter, search: e.target.value })
+                  } else {
+                    setParsedFilter({ ...parsedFilter, search: '' })
+                  }
+                }}
+              />
+            </Col>
+          </Row>
+          {/* <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}></Col>
+          <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}></Col> */}
+        </Row>
       </Col>
     </Row>
   )
@@ -209,7 +238,12 @@ const DataList: React.FC = () => {
         loading={dataListLoading}
         size="middle"
         title={() => (
-          <CustomHeader rowsPerPage={parsedFilter.perPage} total={dataCount} />
+          <CustomHeader
+            rowsPerPage={parsedFilter.perPage}
+            total={dataCount}
+            search={parsedFilter.search}
+            setParsedFilter={setParsedFilter}
+          />
         )}
         pagination={{
           position: ['bottomCenter'],

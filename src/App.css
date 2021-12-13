@@ -92,7 +92,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 15px 40px;
+  margin: 15px 10px;
 }
 
 .site-layout-background-footer {
@@ -187,4 +187,27 @@
   justify-content: center;
   align-items: center;
   font-size: 30px;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 1.428rem;
+  border: 1px solid #dae1e7;
+}
+
+.ant-input-affix-wrapper-sm {
+  padding: 0px 15px;
+}
+
+.ant-layout-header .anticon {
+  font-size: 20px;
+}
+
+.ant-avatar.ant-avatar-icon > .anticon {
+  font-size: 15px;
+}
+
+.user-details-horizontal {
+  float: right;
+  display: flex;
+  flex-direction: column;
 }

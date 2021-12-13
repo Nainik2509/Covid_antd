@@ -10,7 +10,7 @@ type paramId = number
 export const getAllCovidSurvey = (params: ParsedFilter) => {
   return async (dispatch: Dispatch<IAction>) => {
     return API.get(
-      `${COVIDSURVEY_GENERIC_API}/?limit=${params.perPage}&perPage=${
+      `${COVIDSURVEY_GENERIC_API}/?page=${params.page}&perPage=${
         params.perPage
       }&search=${params.search}&counter=${true}`
     ).then((response) => {
