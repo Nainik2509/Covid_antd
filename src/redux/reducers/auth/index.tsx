@@ -5,8 +5,19 @@ import {
 } from '../../actions/auth/auth-types'
 
 const initialState: InitialState = {
-  userData: null,
-  token: '',
+  userData: {
+    id: 12,
+    first_name: 'Nain',
+    last_name: 'sdvsdgfd',
+    email: 'sdvd@dfb.com',
+    role: 'Admin',
+    status: 'Active',
+    createdAt: 'sdvfd',
+    updatedAt: 'sdvsd',
+    userId: null,
+    token: 'dfsdfd',
+  },
+  token: 'assdf',
 }
 
 const Autheducer = (

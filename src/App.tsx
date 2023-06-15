@@ -14,9 +14,9 @@ function App() {
     <React.Suspense fallback={<FallBackSpinner />}>
       <div className="App">
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Router />
-          </PersistGate>
+          {/* <PersistGate loading={null} persistor={persistor}> */}
+          <Router />
+          {/* </PersistGate> */}
         </Provider>
       </div>
     </React.Suspense>

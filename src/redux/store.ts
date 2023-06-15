@@ -27,7 +27,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 // Creating Store
 const store = createStore(
-  persistedReducer,
+  rootReducer,
   composedEnhancers(applyMiddleware(...middleware))
 )
 
